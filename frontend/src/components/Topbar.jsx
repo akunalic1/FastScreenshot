@@ -1,30 +1,33 @@
 import React from "react";
-import "./../style/topbar.css";
+
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import "./../style/topbar.css";
+
 const classnames = require("classnames");
 
 const TopBar = ({
-  openSidebar,
-  setOpenSidebar,
-  openInformation,
-  setOpenInformation,
+  isSidebarOpened,
+  setIsSidebarOpened,
+  areDetailsOpened,
+  setAreDetailsOpened,
 }) => {
   return (
     <div className="topbar">
       <button
         className={classnames("button", "sidebar-button", {
-          "rotate-sidebar-button": openSidebar,
+          "rotate-sidebar-button": isSidebarOpened,
         })}
-        onClick={(e) => setOpenSidebar(!openSidebar)}
+        onClick={(e) => setIsSidebarOpened(!isSidebarOpened)}
       >
         <FontAwesomeIcon icon={faBars} />
       </button>
       <button
         className={classnames("button", "sidebar-button", {
-          "rotate-Information-button": openInformation,
+          "rotate-Information-button": areDetailsOpened,
         })}
-        onClick={(e) => setOpenInformation(!openInformation)}
+        onClick={(e) => setAreDetailsOpened(!areDetailsOpened)}
       >
         <FontAwesomeIcon icon={faBars} />
       </button>

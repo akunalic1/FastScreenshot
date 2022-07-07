@@ -1,15 +1,20 @@
+import React from "react";
+
 import { faBorderAll } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+
 import "./../style/sidebar.css";
 
-const Sidebar = ({ openSidebar }) => {
+const classnames = require("classnames");
+
+const Sidebar = ({ isSidebarOpened }) => {
   return (
     <div className="wrapper">
       <div
-        className={`sidebar is-fullheight hero ${
-          !openSidebar ? "showSidebar" : "hideSidebar"
-        }`}
+        className={classnames("sidebar", "is-fullheight", "hero", {
+          showSidebar: isSidebarOpened,
+          hideSidebar: !isSidebarOpened,
+        })}
       >
         <ul>
           <li>

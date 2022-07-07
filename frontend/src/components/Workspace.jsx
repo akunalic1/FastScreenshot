@@ -1,9 +1,12 @@
 import React from "react";
+
 import "./../style/workspace.css";
 
-const Workspace = ({ openSidebar }) => {
+const classnames = require("classnames");
+
+const Workspace = () => {
   return (
-    <div className={`workspace`}>
+    <div className={classnames("workspace")}>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus ipsum
       ratione ullam, accusantium explicabo placeat aliquam laboriosam illo
       sequi, et vero eaque nulla voluptates at optio. Repellat placeat quod enim

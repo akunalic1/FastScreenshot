@@ -1,25 +1,28 @@
 import React, { useState } from "react";
+
 import TopBar from "./Topbar.jsx";
 import Sidebar from "./Sidebar.jsx";
 import Workspace from "./Workspace.jsx";
-import Information from "./Information.jsx";
+import Details from "./Details.jsx";
+
 import "./../style/app.css";
 
 const App = () => {
-  const [openSidebar, setOpenSidebar] = useState(true);
-  const [openInformation, setOpenInformation] = useState(true);
+  const [isSidebarOpened, setIsSidebarOpened] = useState(true);
+  const [areDetailsOpened, setAreDetailsOpened] = useState(true);
+
   return (
     <>
       <TopBar
-        openSidebar={openSidebar}
-        setOpenSidebar={setOpenSidebar}
-        openInformation={openInformation}
-        setOpenInformation={setOpenInformation}
+        isSidebarOpened={isSidebarOpened}
+        setIsSidebarOpened={setIsSidebarOpened}
+        areDetailsOpened={areDetailsOpened}
+        setAreDetailsOpened={setAreDetailsOpened}
       ></TopBar>
       <div className="main-wrapper">
-        <Sidebar openSidebar={openSidebar}></Sidebar>
+        <Sidebar isSidebarOpened={isSidebarOpened}></Sidebar>
         <Workspace></Workspace>
-        <Information openInformation={openInformation}></Information>
+        <Details areDetailsOpened={areDetailsOpened}></Details>
       </div>
     </>
   );

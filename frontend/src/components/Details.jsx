@@ -1,15 +1,17 @@
 import React from "react";
-import "./../style/information.css";
+
+import "./../style/details.css";
+
 const classnames = require("classnames");
 
-const Information = ({ openInformation }) => {
-  console.log(openInformation);
+const Details = ({ areDetailsOpened }) => {
+  console.log(areDetailsOpened);
   return (
     <div className="wrapper">
       <div
         className={classnames("information is-fullheight hero", {
-          showInfo: !openInformation,
-          hideInfo: openInformation,
+          showInfo: areDetailsOpened,
+          hideInfo: !areDetailsOpened,
         })}
       >
         Picture placeholder info
@@ -18,4 +20,4 @@ const Information = ({ openInformation }) => {
   );
 };
 
-export default Information;
+export default Details;
