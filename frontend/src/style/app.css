@@ -1,0 +1,44 @@
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --dark-blue: #181724;
+  --dark-shadow-blue: #292736;
+  --light-bg: #e3eaf3;
+
+  --sidebar-offset: 200px;
+}
+
+.main-wrapper {
+  display: flex;
+}
+
+.sidebar-button {
+  color: var(--light-bg);
+  background-color: var(--dark-blue);
+  padding: 0.5rem;
+  height: fit-content;
+  transition: transform 0.25s ease;
+}
+.rotate-sidebar-button {
+  transform: rotate(90deg);
+  transition: transform 0.25s ease;
+}
+.rotate-Information-button {
+  transform: rotate(-90deg);
+  transition: transform 0.25s ease;
+}
+
+.fa-bars {
+  height: 1rem;
+  width: 1rem;
+}
+
+.wrapper {
+  width: fit-content;
+}

@@ -1,0 +1,16 @@
+.information {
+  background-color: var(--dark-blue);
+  height: 100%;
+  width: 200px;
+}
+.showInfo {
+  z-index: 11;
+  opacity: 1;
+  transition: width 0.25s;
+}
+.hideInfo {
+  z-index: 11;
+  opacity: 1;
+  width: 0px;
+  transition: all 0.25s;
+}
