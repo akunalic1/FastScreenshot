@@ -1,4 +1,4 @@
-@import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css";
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans&family=Rubik+Moonrocks&display=swap");
 
 * {
   margin: 0;
@@ -16,6 +16,9 @@
 
 .main-wrapper {
   display: flex;
+  position: absolute;
+  bottom: 0;
+  top: 55px;
 }
 
 .sidebar-button {
@@ -46,6 +49,7 @@
   background-color: var(--dark-blue);
   height: 100%;
   width: 200px;
+  justify-content: normal;
 }
 
 .showSidebar,
@@ -73,3 +77,4 @@
 .wrapper {
   width: fit-content;
 }
+

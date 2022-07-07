@@ -93,8 +93,10 @@ const Sidebar = ({ isSidebarOpened }) => {
             className={classnames("folder", {
               isSubfolder: !!folder.parentFolder,
             })}>
-            <i>{folder.icon}</i>
-            <span>{folder.name}</span>
+            <div>
+              <i className="folder-icon">{folder.icon}</i>
+              <span>{folder.name}</span>
+            </div>
             <p>{folder.amount}</p>
           </div>
         </li>
@@ -114,7 +116,8 @@ const Sidebar = ({ isSidebarOpened }) => {
           showSidebar: isSidebarOpened,
           hideSidebar: !isSidebarOpened,
         })}>
-        <ul>{renderFolders(folders)}</ul>
+        <div className="title">Folders</div>
+        <ol>{renderFolders(folders)}</ol>
       </div>
     </div>
   );

@@ -1,24 +1,29 @@
 import React from "react";
 
-import "./../style/workspace.css";
+import TopBar from "./Topbar.jsx";
+import Sidebar from "./Sidebar.jsx";
+import Content from "./Content.jsx";
+import Details from "./Details.jsx";
 
-const classnames = require("classnames");
-
-const Workspace = () => {
+const Workspace = ({
+  isSidebarOpened,
+  setIsSidebarOpened,
+  areDetailsOpened,
+  setAreDetailsOpened,
+}) => {
   return (
-    <div className={classnames("workspace")}>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus ipsum
-      ratione ullam, accusantium explicabo placeat aliquam laboriosam illo
-      sequi, et vero eaque nulla voluptates at optio. Repellat placeat quod enim
-      repudiandae quo magnam, rem doloremque esse maiores, quibusdam quasi,
-      omnis dignissimos. Impedit inventore fugiat ratione suscipit quod.
-      Recusandae est officia ipsam neque pariatur ipsum tenetur eum culpa iste
-      amet tempora asperiores atque rerum sed voluptatum necessitatibus cumque
-      dignissimos quae, eos impedit. Dolor, tenetur? Veniam, doloremque.
-      Assumenda mollitia, dolor nulla veniam inventore, eaque possimus cum alias
-      libero, saepe dolorem quia adipisci veritatis. Nulla magni id voluptatum
-      quibusdam maxime cumque molestiae minima!
-    </div>
+    <>
+      <TopBar
+        isSidebarOpened={isSidebarOpened}
+        setIsSidebarOpened={setIsSidebarOpened}
+        areDetailsOpened={areDetailsOpened}
+        setAreDetailsOpened={setAreDetailsOpened}></TopBar>
+      <div className="main-wrapper">
+        <Sidebar isSidebarOpened={isSidebarOpened}></Sidebar>
+        <Content></Content>
+        <Details areDetailsOpened={areDetailsOpened}></Details>
+      </div>
+    </>
   );
 };
 

@@ -3,10 +3,23 @@
   display: flex;
   justify-content: space-between;
   padding: 0.25rem 0.5rem;
+  cursor: pointer;
 }
+
 .isSubfolder {
   margin-left: 1rem;
 }
+
 .hasSubfolders {
   background-color: var(--dark-shadow-blue);
+}
+
+.title {
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  color: var(--light-bg);
+}
+
+.folder-icon {
+  margin-right: 0.5rem;
 }

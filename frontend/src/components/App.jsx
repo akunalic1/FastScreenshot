@@ -1,31 +1,34 @@
 import React, { useState } from "react";
-
-import TopBar from "./Topbar.jsx";
-import Sidebar from "./Sidebar.jsx";
-import Workspace from "./Workspace.jsx";
-import Details from "./Details.jsx";
+import { Route, Routes } from "react-router";
 
 import "./../style/app.css";
+import LogIn from "./LogIn.jsx";
+import Workspace from "./Workspace.jsx";
+
+const isLoggedIn = true;
 
 const App = () => {
   const [isSidebarOpened, setIsSidebarOpened] = useState(true);
   const [areDetailsOpened, setAreDetailsOpened] = useState(true);
 
   return (
-    <>
-      <TopBar
-        isSidebarOpened={isSidebarOpened}
-        setIsSidebarOpened={setIsSidebarOpened}
-        areDetailsOpened={areDetailsOpened}
-        setAreDetailsOpened={setAreDetailsOpened}
-      ></TopBar>
-      <div className="main-wrapper">
-        <Sidebar isSidebarOpened={isSidebarOpened}></Sidebar>
-        <Workspace></Workspace>
-        <Details areDetailsOpened={areDetailsOpened}></Details>
-      </div>
-    </>
+    <Routes>
+      <Route
+        path="/"
+        element={
+          isLoggedIn ? (
+            <Workspace
+              isSidebarOpened={isSidebarOpened}
+              setIsSidebarOpened={setIsSidebarOpened}
+              areDetailsOpened={areDetailsOpened}
+              setAreDetailsOpened={setAreDetailsOpened}></Workspace>
+          ) : (
+            <LogIn></LogIn>
+          )
+        }></Route>
+    </Routes>
   );
 };
 
 export default App;
+
