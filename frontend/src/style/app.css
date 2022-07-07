@@ -25,10 +25,12 @@
   height: fit-content;
   transition: transform 0.25s ease;
 }
+
 .rotate-sidebar-button {
   transform: rotate(90deg);
   transition: transform 0.25s ease;
 }
+
 .rotate-Information-button {
   transform: rotate(-90deg);
   transition: transform 0.25s ease;
@@ -37,6 +39,35 @@
 .fa-bars {
   height: 1rem;
   width: 1rem;
+}
+
+.sidebar,
+.information {
+  background-color: var(--dark-blue);
+  height: 100%;
+  width: 200px;
+}
+
+.showSidebar,
+.showInfo {
+  z-index: 11;
+  opacity: 1;
+  transition: width 0.25s;
+}
+
+.hideSidebar,
+.hideInfo {
+  z-index: 11;
+  opacity: 1;
+  transition: all 0.25s;
+}
+
+.hideSidebar {
+  width: 20px;
+}
+
+.hideInfo {
+  width: 0;
 }
 
 .wrapper {

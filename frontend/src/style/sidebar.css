@@ -1,16 +1,12 @@
-.sidebar {
-  background-color: var(--dark-blue);
-  height: 100%;
-  width: 200px;
+.folder {
+  color: var(--light-bg);
+  display: flex;
+  justify-content: space-between;
+  padding: 0.25rem 0.5rem;
 }
-.showSidebar {
-  z-index: 11;
-  opacity: 1;
-  transition: width 0.25s;
+.isSubfolder {
+  margin-left: 1rem;
 }
-.hideSidebar {
-  z-index: 11;
-  opacity: 1;
-  width: 20px;
-  transition: all 0.25s;
+.hasSubfolders {
+  background-color: var(--dark-shadow-blue);
 }
