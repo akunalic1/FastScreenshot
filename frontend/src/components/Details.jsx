@@ -10,7 +10,7 @@ const Details = ({ areDetailsOpened, item }) => {
   const showDetails = (item) => {
     return (
       <div className="item-details">
-        <img src={item.url}></img>
+        <img className="item-image" src={item.url}></img>
         <h4>{item.name}</h4>
         <p>{item.date.toString()}</p>
         <p>{item.type}</p>

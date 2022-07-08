@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import {
   faWrench,
@@ -15,7 +15,81 @@ import "./../style/sidebar.css";
 
 const classnames = require("classnames");
 
-const folders = [
+const defaultFolders = [
+  {
+    id: 1,
+    name: "All",
+    type: "default",
+    icon: <FontAwesomeIcon icon={faFolder} />,
+    subfolders: null,
+    parentFolder: null,
+    amount: 123,
+    items: [
+      {
+        id: 1,
+        name: "some name hdjshd",
+        url: "https://picsum.photos/id/1/200/300",
+        folder: 1,
+        date: new Date(),
+        type: "JPG",
+      },
+      {
+        id: 2,
+        name: "some name hdjshd",
+        url: "https://picsum.photos/id/1000/200/300",
+        folder: 1,
+        date: new Date(),
+        type: "JPG",
+      },
+      {
+        id: 3,
+        name: "some name hdjshd",
+        url: "https://picsum.photos/id/167/200/300",
+        folder: 1,
+        date: new Date(),
+        type: "JPG",
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: "Favorite",
+    type: "default",
+    icon: <FontAwesomeIcon icon={faHeart} />,
+    subfolders: null,
+    parentFolder: null,
+    amount: 17,
+  },
+  {
+    id: 4,
+    name: "Photos",
+    type: "default",
+    icon: <FontAwesomeIcon icon={faFolder} />,
+    subfolders: null,
+    parentFolder: null,
+    amount: 12,
+  },
+  {
+    id: 8,
+    name: "All videos",
+    type: "default",
+    icon: <FontAwesomeIcon icon={faFolder} />,
+    subfolders: null,
+    parentFolder: null,
+    amount: 1,
+  },
+  {
+    id: 9,
+    name: "Screen recordings",
+    type: "default",
+    icon: <FontAwesomeIcon icon={faFolder} />,
+    subfolders: null,
+    parentFolder: null,
+    amount: 1,
+  },
+];
+
+const photoFolders = [
   {
     id: 1,
     name: "All",
@@ -36,7 +110,7 @@ const folders = [
   },
   {
     id: 3,
-    name: "My folders",
+    name: "My photoFolders",
     type: "custom",
     icon: <FontAwesomeIcon icon={faFolderTree} />,
     subfolders: [
@@ -70,17 +144,37 @@ const folders = [
     parentFolder: null,
     amount: 12,
   },
+];
+
+const videoFolders = [
   {
-    id: 5,
-    name: "Videos",
+    id: 8,
+    name: "All videos",
     type: "default",
     icon: <FontAwesomeIcon icon={faFolder} />,
     subfolders: null,
     parentFolder: null,
-    amount: 323,
+    amount: 1,
+  },
+  {
+    id: 9,
+    name: "Screen recordings",
+    type: "default",
+    icon: <FontAwesomeIcon icon={faFolder} />,
+    subfolders: null,
+    parentFolder: null,
+    amount: 1,
+  },
+  {
+    id: 10,
+    name: "Trash",
+    type: "default",
+    icon: <FontAwesomeIcon icon={faFolder} />,
+    subfolders: null,
+    parentFolder: null,
+    amount: 1878,
   },
 ];
-
 const upperMenuOptions = [
   {
     name: "Folders",
@@ -110,8 +204,9 @@ const lowerMenuOptions = [
 const Sidebar = ({
   isSidebarOpened,
   setIsSidebarOpened,
-  openedContent,
-  setOpenedContent,
+  openedMenuOption,
+  setOpenedMenuOption,
+  setSelectedFolder,
 }) => {
   const renderOneFolder = (folder) => {
     console.log(folder.id);
@@ -122,7 +217,7 @@ const Sidebar = ({
           className={classnames({
             hasSubfolders: !!folder.subfolders,
           })}
-          onClick={(e) => console.log(folder.id)}>
+          onClick={(e) => setSelectedFolder(folder)}>
           <div
             className={classnames("folder", {
               isSubfolder: !!folder.parentFolder,
@@ -139,23 +234,24 @@ const Sidebar = ({
     );
   };
 
-  const renderFolders = (folders) => {
-    return folders.map((folder) => renderOneFolder(folder));
+  const renderFolders = (photoFolders) => {
+    return photoFolders.map((folder) => renderOneFolder(folder));
   };
 
   const menuIconHandler = (e, option) => {
-    if (["Info", "Settings"].includes(e.target.values)) {
+    if (["Info", "Settings"].includes(option.name)) {
       setIsSidebarOpened(false);
-      setOpenedContent(option.name);
+      setOpenedMenuOption(option.name);
     } else {
-      if (openedContent === option.name) {
+      if (openedMenuOption === option.name) {
         setIsSidebarOpened(!isSidebarOpened);
       } else {
         setIsSidebarOpened(true);
-        setOpenedContent(option.name);
+        setOpenedMenuOption(option.name);
       }
     }
   };
+
   const renderMenu = () => {
     return (
       <>
@@ -183,6 +279,45 @@ const Sidebar = ({
     );
   };
 
+  const renderSidebar = () => {
+    const defaultPhotoFolders = photoFolders.filter(
+      (folder) => folder.type === "default"
+    );
+    const customPhotoFolders = photoFolders.filter(
+      (folder) => folder.type !== "default"
+    );
+    const defaultVideoFolders = videoFolders.filter(
+      (folder) => folder.type === "default"
+    );
+    const customVideoFolders = videoFolders.filter(
+      (folder) => folder.type !== "default"
+    );
+
+    return (
+      <>
+        <ul style={{ listStyle: "none" }}>
+          {renderFolders(
+            openedMenuOption === "Photos"
+              ? defaultPhotoFolders
+              : openedMenuOption === "Videos"
+              ? defaultVideoFolders
+              : [...defaultPhotoFolders, ...defaultVideoFolders]
+          )}
+        </ul>
+        <div className="sidebar-separator"></div>
+        <ul style={{ listStyle: "none" }}>
+          {renderFolders(
+            openedMenuOption === "Photos"
+              ? customPhotoFolders
+              : openedMenuOption === "Videos"
+              ? customVideoFolders
+              : [...customPhotoFolders, ...customVideoFolders]
+          )}
+        </ul>
+      </>
+    );
+  };
+
   return (
     <div className="wrapper">
       <div className="sidebar-options">{renderMenu()}</div>
@@ -191,8 +326,8 @@ const Sidebar = ({
           showSidebar: isSidebarOpened,
           hideSidebar: !isSidebarOpened,
         })}>
-        <div className="title">{openedContent}</div>
-        <ul style={{ listStyle: "none" }}>{renderFolders(folders)}</ul>
+        <div className="title">{openedMenuOption}</div>
+        {renderSidebar()}
       </div>
     </div>
   );

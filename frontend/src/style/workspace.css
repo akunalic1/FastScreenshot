@@ -1,11 +1,22 @@
 .content {
   background-color: var(--primary);
   width: 100%;
-  padding: 1rem;
 }
 
 .image-content {
   width: 7rem;
   height: auto;
   margin: 0.5rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  border: 1px solid var(--secondary);
+}
+
+.item-image {
+  width: 100%;
+}
+
+.item-details {
+  display: flex;
+  flex-direction: column;
 }

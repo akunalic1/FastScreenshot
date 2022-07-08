@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import "./../style/workspace.css";
 
@@ -31,7 +31,13 @@ const images = [
   },
 ];
 
-const Content = ({ folder, setClickedItem }) => {
+const Content = ({ selectedFolder, setClickedItem }) => {
+  const [items, setItems] = useState(images);
+
+  useEffect(() => {
+    setItems(images.filter((image) => image.folder === selectedFolder?.id));
+  }, [selectedFolder]);
+
   const renderOneImage = (image) => {
     return (
       <img
@@ -42,11 +48,11 @@ const Content = ({ folder, setClickedItem }) => {
     );
   };
 
-  const renderImages = (images) => {
-    return images.map((image) => renderOneImage(image));
+  const renderImages = (items) => {
+    return items.map((image) => renderOneImage(image));
   };
 
-  return <div className={classnames("content")}>{renderImages(images)}</div>;
+  return <div className={classnames("content")}>{renderImages(items)}</div>;
 };
 
 export default Content;

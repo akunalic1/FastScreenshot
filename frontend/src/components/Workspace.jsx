@@ -13,26 +13,28 @@ const Workspace = ({
   areDetailsOpened,
 }) => {
   const navigate = useNavigate();
-  const [openedContent, setOpenedContent] = useState("folders");
+  const [openedMenuOption, setOpenedMenuOption] = useState("Folders");
+  const [clickedItem, setClickedItem] = useState(null);
+  const [selectedFolder, setSelectedFolder] = useState(null);
 
   useEffect(() => {
     if (!isLoggedIn) navigate("/login");
   });
-
-  const [clickedItem, setClickedItem] = useState(null);
 
   return (
     <div className="main-wrapper">
       <Sidebar
         isSidebarOpened={isSidebarOpened}
         setIsSidebarOpened={setIsSidebarOpened}
-        openedContent={openedContent}
-        setOpenedContent={setOpenedContent}
+        openedMenuOption={openedMenuOption}
+        setOpenedMenuOption={setOpenedMenuOption}
+        setSelectedFolder={setSelectedFolder}
       />
       <Content
         setClickedItem={setClickedItem}
-        openedContent={openedContent}
-        setOpenedContent={setOpenedContent}
+        openedMenuOption={openedMenuOption}
+        setOpenedMenuOption={setOpenedMenuOption}
+        selectedFolder={selectedFolder}
       />
       <Details areDetailsOpened={areDetailsOpened} item={clickedItem}></Details>
     </div>
