@@ -81,7 +81,38 @@ const folders = [
   },
 ];
 
-const Sidebar = ({ isSidebarOpened }) => {
+const upperMenuOptions = [
+  {
+    name: "Folders",
+    icon: faFolder,
+  },
+  {
+    name: "Photos",
+    icon: faImage,
+  },
+  {
+    name: "Videos",
+    icon: faFilm,
+  },
+];
+
+const lowerMenuOptions = [
+  {
+    name: "Info",
+    icon: faInfo,
+  },
+  {
+    name: "Settings",
+    icon: faWrench,
+  },
+];
+
+const Sidebar = ({
+  isSidebarOpened,
+  setIsSidebarOpened,
+  openedContent,
+  setOpenedContent,
+}) => {
   const renderOneFolder = (folder) => {
     console.log(folder.id);
     return (
@@ -112,27 +143,55 @@ const Sidebar = ({ isSidebarOpened }) => {
     return folders.map((folder) => renderOneFolder(folder));
   };
 
-  return (
-    <div className="wrapper">
-      <div className="sidebar-options">
+  const menuIconHandler = (e, option) => {
+    if (["Info", "Settings"].includes(e.target.values)) {
+      setIsSidebarOpened(false);
+      setOpenedContent(option.name);
+    } else {
+      if (openedContent === option.name) {
+        setIsSidebarOpened(!isSidebarOpened);
+      } else {
+        setIsSidebarOpened(true);
+        setOpenedContent(option.name);
+      }
+    }
+  };
+  const renderMenu = () => {
+    return (
+      <>
         <div className="upper">
-          <FontAwesomeIcon className="menu-icon" icon={faFolder} />
-          <FontAwesomeIcon className="menu-icon" icon={faImage} />
-          <FontAwesomeIcon className="menu-icon" icon={faFilm} />
+          {upperMenuOptions.map((option) => (
+            <FontAwesomeIcon
+              values={option.name}
+              onClick={(e) => menuIconHandler(e, option)}
+              className="menu-icon"
+              icon={option.icon}
+            />
+          ))}
         </div>
         <div className="lower">
-          <FontAwesomeIcon
-            className="menu-icon"
-            icon={faInfo}></FontAwesomeIcon>
-          <FontAwesomeIcon className="menu-icon" icon={faWrench} />
+          {lowerMenuOptions.map((option) => (
+            <FontAwesomeIcon
+              values={option.name}
+              onClick={(e) => menuIconHandler(e, option)}
+              className="menu-icon"
+              icon={option.icon}
+            />
+          ))}
         </div>
-      </div>
+      </>
+    );
+  };
+
+  return (
+    <div className="wrapper">
+      <div className="sidebar-options">{renderMenu()}</div>
       <div
         className={classnames("sidebar", "is-fullheight", "hero", {
           showSidebar: isSidebarOpened,
           hideSidebar: !isSidebarOpened,
         })}>
-        <div className="title">Folders</div>
+        <div className="title">{openedContent}</div>
         <ul style={{ listStyle: "none" }}>{renderFolders(folders)}</ul>
       </div>
     </div>

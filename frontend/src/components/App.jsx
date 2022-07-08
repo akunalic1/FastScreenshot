@@ -29,6 +29,7 @@ const App = () => {
             <Workspace
               isLoggedIn={isLoggedIn}
               isSidebarOpened={isSidebarOpened}
+              setIsSidebarOpened={setIsSidebarOpened}
               areDetailsOpened={areDetailsOpened}
             />
           }></Route>

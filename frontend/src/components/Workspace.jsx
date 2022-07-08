@@ -6,8 +6,14 @@ import Content from "./Content.jsx";
 import Details from "./Details.jsx";
 import { useNavigate } from "react-router";
 
-const Workspace = ({ isLoggedIn, isSidebarOpened, areDetailsOpened }) => {
+const Workspace = ({
+  isLoggedIn,
+  isSidebarOpened,
+  setIsSidebarOpened,
+  areDetailsOpened,
+}) => {
   const navigate = useNavigate();
+  const [openedContent, setOpenedContent] = useState("folders");
 
   useEffect(() => {
     if (!isLoggedIn) navigate("/login");
@@ -17,8 +23,17 @@ const Workspace = ({ isLoggedIn, isSidebarOpened, areDetailsOpened }) => {
 
   return (
     <div className="main-wrapper">
-      <Sidebar isSidebarOpened={isSidebarOpened}></Sidebar>
-      <Content setClickedItem={setClickedItem}></Content>
+      <Sidebar
+        isSidebarOpened={isSidebarOpened}
+        setIsSidebarOpened={setIsSidebarOpened}
+        openedContent={openedContent}
+        setOpenedContent={setOpenedContent}
+      />
+      <Content
+        setClickedItem={setClickedItem}
+        openedContent={openedContent}
+        setOpenedContent={setOpenedContent}
+      />
       <Details areDetailsOpened={areDetailsOpened} item={clickedItem}></Details>
     </div>
   );
