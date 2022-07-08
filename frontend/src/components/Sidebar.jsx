@@ -1,10 +1,13 @@
 import React from "react";
 
 import {
-  faBorderAll,
+  faWrench,
   faFolder,
   faHeart,
   faFolderTree,
+  faImage,
+  faFilm,
+  faInfo,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -111,13 +114,26 @@ const Sidebar = ({ isSidebarOpened }) => {
 
   return (
     <div className="wrapper">
+      <div className="sidebar-options">
+        <div className="upper">
+          <FontAwesomeIcon className="menu-icon" icon={faFolder} />
+          <FontAwesomeIcon className="menu-icon" icon={faImage} />
+          <FontAwesomeIcon className="menu-icon" icon={faFilm} />
+        </div>
+        <div className="lower">
+          <FontAwesomeIcon
+            className="menu-icon"
+            icon={faInfo}></FontAwesomeIcon>
+          <FontAwesomeIcon className="menu-icon" icon={faWrench} />
+        </div>
+      </div>
       <div
         className={classnames("sidebar", "is-fullheight", "hero", {
           showSidebar: isSidebarOpened,
           hideSidebar: !isSidebarOpened,
         })}>
         <div className="title">Folders</div>
-        <ol>{renderFolders(folders)}</ol>
+        <ul style={{ listStyle: "none" }}>{renderFolders(folders)}</ul>
       </div>
     </div>
   );

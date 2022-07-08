@@ -1,29 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import TopBar from "./Topbar.jsx";
 import Sidebar from "./Sidebar.jsx";
 import Content from "./Content.jsx";
 import Details from "./Details.jsx";
+import { useNavigate } from "react-router";
 
-const Workspace = ({
-  isSidebarOpened,
-  setIsSidebarOpened,
-  areDetailsOpened,
-  setAreDetailsOpened,
-}) => {
+const Workspace = ({ isLoggedIn, isSidebarOpened, areDetailsOpened }) => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isLoggedIn) navigate("/login");
+  });
+
+  const [clickedItem, setClickedItem] = useState(null);
+
   return (
-    <>
-      <TopBar
-        isSidebarOpened={isSidebarOpened}
-        setIsSidebarOpened={setIsSidebarOpened}
-        areDetailsOpened={areDetailsOpened}
-        setAreDetailsOpened={setAreDetailsOpened}></TopBar>
-      <div className="main-wrapper">
-        <Sidebar isSidebarOpened={isSidebarOpened}></Sidebar>
-        <Content></Content>
-        <Details areDetailsOpened={areDetailsOpened}></Details>
-      </div>
-    </>
+    <div className="main-wrapper">
+      <Sidebar isSidebarOpened={isSidebarOpened}></Sidebar>
+      <Content setClickedItem={setClickedItem}></Content>
+      <Details areDetailsOpened={areDetailsOpened} item={clickedItem}></Details>
+    </div>
   );
 };
 

@@ -1,10 +1,9 @@
 .topbar {
-  background-color: var(--dark-blue);
+  background-color: var(--primary);
   display: flex;
   justify-content: space-between;
   padding: 0.5rem;
-  border-bottom: 1px solid var(--dark-shadow-blue);
-  color: var(--light-bg);
+  color: var(--secondary);
 }
 
 .left-topbar {
@@ -14,4 +13,5 @@
 
 .logo {
   font-family: "Rubik Moonrocks", cursive;
+  margin-left: 0.5rem;
 }

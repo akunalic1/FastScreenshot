@@ -3,29 +3,37 @@ import { Route, Routes } from "react-router";
 
 import "./../style/app.css";
 import LogIn from "./LogIn.jsx";
+import TopBar from "./Topbar";
 import Workspace from "./Workspace.jsx";
 
 const isLoggedIn = true;
 
 const App = () => {
   const [isSidebarOpened, setIsSidebarOpened] = useState(true);
-  const [areDetailsOpened, setAreDetailsOpened] = useState(true);
-
+  const [areDetailsOpened, setAreDetailsOpened] = useState(false);
   return (
     <Routes>
       <Route
         path="/"
         element={
-          isLoggedIn ? (
+          <TopBar
+            isSidebarOpened={isSidebarOpened}
+            setIsSidebarOpened={setIsSidebarOpened}
+            areDetailsOpened={areDetailsOpened}
+            setAreDetailsOpened={setAreDetailsOpened}
+          />
+        }>
+        <Route
+          path="/"
+          element={
             <Workspace
+              isLoggedIn={isLoggedIn}
               isSidebarOpened={isSidebarOpened}
-              setIsSidebarOpened={setIsSidebarOpened}
               areDetailsOpened={areDetailsOpened}
-              setAreDetailsOpened={setAreDetailsOpened}></Workspace>
-          ) : (
-            <LogIn></LogIn>
-          )
-        }></Route>
+            />
+          }></Route>
+        <Route path="login" element={<LogIn />}></Route>
+      </Route>
     </Routes>
   );
 };

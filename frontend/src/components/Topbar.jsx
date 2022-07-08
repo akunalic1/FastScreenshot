@@ -4,6 +4,7 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import "./../style/topbar.css";
+import { Outlet } from "react-router";
 
 const classnames = require("classnames");
 
@@ -14,25 +15,28 @@ const TopBar = ({
   setAreDetailsOpened,
 }) => {
   return (
-    <div className="topbar">
-      <div className="left-topbar">
+    <>
+      <div className="topbar">
+        <div className="left-topbar">
+          <button
+            className={classnames("sidebar-button", {
+              "rotate-sidebar-button": isSidebarOpened,
+            })}
+            onClick={(e) => setIsSidebarOpened(!isSidebarOpened)}>
+            <FontAwesomeIcon icon={faBars} />
+          </button>
+          <div className="logo">loogo</div>
+        </div>
         <button
-          className={classnames("button", "sidebar-button", {
-            "rotate-sidebar-button": isSidebarOpened,
+          className={classnames("sidebar-button", {
+            "rotate-Information-button": areDetailsOpened,
           })}
-          onClick={(e) => setIsSidebarOpened(!isSidebarOpened)}>
+          onClick={(e) => setAreDetailsOpened(!areDetailsOpened)}>
           <FontAwesomeIcon icon={faBars} />
         </button>
-        <div className="logo">loogo</div>
       </div>
-      <button
-        className={classnames("button", "sidebar-button", {
-          "rotate-Information-button": areDetailsOpened,
-        })}
-        onClick={(e) => setAreDetailsOpened(!areDetailsOpened)}>
-        <FontAwesomeIcon icon={faBars} />
-      </button>
-    </div>
+      <Outlet></Outlet>
+    </>
   );
 };
 

@@ -1,5 +1,11 @@
-.workspace {
-  display: block;
+.content {
+  background-color: var(--primary);
   width: 100%;
-  background-color: green;
+  padding: 1rem;
+}
+
+.image-content {
+  width: 7rem;
+  height: auto;
+  margin: 0.5rem;
 }

@@ -1,8 +1,8 @@
 .folder {
-  color: var(--light-bg);
+  color: var(--secondary);
   display: flex;
   justify-content: space-between;
-  padding: 0.25rem 0.5rem;
+  padding: 0.3rem 0.5rem;
   cursor: pointer;
 }
 
@@ -17,9 +17,29 @@
 .title {
   padding: 0.5rem;
   font-size: 1.5rem;
-  color: var(--light-bg);
+  color: var(--secondary);
 }
 
 .folder-icon {
   margin-right: 0.5rem;
+}
+
+.sidebar-options,
+.upper,
+.lower {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar-options {
+  margin: 2rem 0;
+}
+
+.upper,
+.lower {
+  background-color: var(--secondary);
+  padding: 0.5rem;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
 }

@@ -1,15 +1,25 @@
 @import url("https://fonts.googleapis.com/css2?family=PT+Sans&family=Rubik+Moonrocks&display=swap");
 
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap");
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: sans-serif;
+}
+body {
+  background-color: var(--secondary);
 }
 
 :root {
-  --dark-blue: #181724;
+  --primary: #16161e;
+  --secondary: #b6b7be;
+
   --dark-shadow-blue: #292736;
-  --light-bg: #e3eaf3;
+  --green-bg: #209e55;
+  --light-green: #34e1d5;
+  --blue: #3e7cc6;
 
   --sidebar-offset: 200px;
 }
@@ -18,15 +28,19 @@
   display: flex;
   position: absolute;
   bottom: 0;
-  top: 55px;
+  top: 52px;
+  left: 0;
+  right: 0;
 }
 
 .sidebar-button {
-  color: var(--light-bg);
-  background-color: var(--dark-blue);
+  color: var(--secondary);
+  background-color: var(--primary);
   padding: 0.5rem;
   height: fit-content;
   transition: transform 0.25s ease;
+  border: 1px solid var(--secondary);
+  border-radius: 5px;
 }
 
 .rotate-sidebar-button {
@@ -46,10 +60,13 @@
 
 .sidebar,
 .information {
-  background-color: var(--dark-blue);
+  border: 1px solid var(--secondary);
   height: 100%;
   width: 200px;
   justify-content: normal;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  font-family: "Ubuntu", sans-serif;
 }
 
 .showSidebar,
@@ -62,19 +79,28 @@
 .hideSidebar,
 .hideInfo {
   z-index: 11;
-  opacity: 1;
-  transition: all 0.25s;
-}
-
-.hideSidebar {
-  width: 20px;
-}
-
-.hideInfo {
   width: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.25s;
 }
 
 .wrapper {
   width: fit-content;
+  display: flex;
+  flex-direction: row;
+  background-color: var(--primary);
+  padding: 0.5rem;
+  gap: 0.5rem;
+}
+
+.menu-icon {
+  height: 1.5rem;
+  width: 1.5rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+
+  background-color: var(--primary);
+  color: var(--secondary);
 }
 
