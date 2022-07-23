@@ -10,54 +10,22 @@ const {
 } = require("electron");
 const path = require("path");
 const isDev = require("electron-is-dev");
-
-const env = "dev";
+const TrayMainWindow = require("./TrayMainWindow");
+const TrayIcon = require("./TrayIcon");
 
 let trayMainWindow, workspaceWindow, tray;
+const env = "dev";
 
 const createTrayWindowToggle = () => {
-  trayMainWindow = new BrowserWindow({
-    width: 200,
-    height: 300,
-    show: true,
-    frame: false,
-    resizable: false,
-    webPreferences: {
-      preload: path.join(__dirname, "preload.js"),
-    },
-  });
-  const trayWindowPath =
+  trayMainWindow = new TrayMainWindow(
     env === "dev"
       ? "http://localhost:8080"
-      : path.join(app.getAppPath(), "dist", "index.html");
-  trayMainWindow.loadURL(trayWindowPath);
-
-  trayMainWindow.on("closed", () => {
-    trayMainWindow = null;
-    tray = null;
-  });
-  createTrayIcon();
-};
-
-const createTrayIcon = () => {
-  tray = new Tray(
-    nativeImage.createFromPath(
-      path.join(app.getAppPath(), "src", "assets", "bunny.png")
-    )
+      : path.join(app.getAppPath(), "dist", "index.html")
   );
-  const { x, y } = tray.getBounds();
-  const { width, height } = trayMainWindow.getBounds();
-
-  trayMainWindow.setBounds({
-    x: x - width / 2,
-    y: y - height - 10,
-  });
-  tray.setToolTip("Take some screenshots");
-
-  tray.on("click", () => {
-    if (trayMainWindow.isVisible()) trayMainWindow.hide();
-    else trayMainWindow.show();
-  });
+  tray = new TrayIcon(
+    path.join(app.getAppPath(), "src", "assets", "bunny.png"),
+    trayMainWindow
+  );
 };
 
 const createWorkspaceWindow = () => {
@@ -118,6 +86,8 @@ app
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
+    trayMainWindow = null;
+    tray = null;
     app.quit();
   }
 });
