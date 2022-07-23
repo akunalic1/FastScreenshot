@@ -16,7 +16,13 @@ const env = "dev";
 let trayWindowToggle, childWindow, tray;
 
 const createTrayWindowToggle = () => {
-  trayWindowToggle = new BrowserWindow({ width: 780, height: 620 });
+  trayWindowToggle = new BrowserWindow({
+    width: 200,
+    height: 300,
+    show: true,
+    frame: false,
+    resize: false,
+  });
   const trayWindowPath =
     env === "dev"
       ? "http://localhost:8080"
@@ -32,7 +38,22 @@ const createTrayIcon = () => {
       path.join(app.getAppPath(), "src", "assets", "bunny.png")
     )
   );
+  const { x, y } = tray.getBounds();
+  console.log(tray.getBounds());
+  const { width: windowWidth, height: windowHeight } =
+    trayWindowToggle.getBounds();
+
+  trayWindowToggle.setBounds({
+    x: x - windowWidth / 2,
+    y: y - windowHeight - 10,
+  });
+  console.log(trayWindowToggle.getBounds());
   tray.setToolTip("Take some screenshots");
+
+  tray.on("click", () => {
+    if (trayWindowToggle.isVisible()) trayWindowToggle.hide();
+    else trayWindowToggle.show();
+  });
 };
 
 const createChildWindow = () => {
