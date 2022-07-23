@@ -7,6 +7,7 @@ import TopBar from "./Topbar";
 import Workspace from "./Workspace.jsx";
 
 const isLoggedIn = true;
+const IS_ELECTRON = true;
 
 const App = () => {
   const [isSidebarOpened, setIsSidebarOpened] = useState(true);
