@@ -21,7 +21,7 @@ const createTrayWindowToggle = () => {
     height: 300,
     show: true,
     frame: false,
-    resize: false,
+    resizable: false,
   });
   const trayWindowPath =
     env === "dev"
