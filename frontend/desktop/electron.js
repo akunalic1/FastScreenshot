@@ -11,11 +11,16 @@ const {
 const path = require("path");
 const isDev = require("electron-is-dev");
 
+const env = "dev";
+
 let trayWindowToggle, childWindow, tray;
 
 const createTrayWindowToggle = () => {
   trayWindowToggle = new BrowserWindow({ width: 780, height: 620 });
-  const trayWindowPath = path.join(app.getAppPath(), "dist", "index.html");
+  const trayWindowPath =
+    env === "dev"
+      ? "http://localhost:8080"
+      : path.join(app.getAppPath(), "dist", "index.html");
   trayWindowToggle.loadURL(trayWindowPath);
   trayWindowToggle.on("closed", () => (trayWindowToggle = null));
   createTrayIcon();

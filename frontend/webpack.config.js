@@ -2,7 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack"); //to access built-in plugins
 
-module.exports = {
+const context = {
   mode: "development",
   entry: {
     tray: path.resolve(__dirname, "desktop", "index.js"),
@@ -21,3 +21,5 @@ module.exports = {
   },
   plugins: [new HtmlWebpackPlugin({ template: "./desktop/tray.html" })],
 };
+
+module.exports = context;
