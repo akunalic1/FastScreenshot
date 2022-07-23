@@ -13,16 +13,29 @@ const isDev = require("electron-is-dev");
 
 const env = "dev";
 
-let trayWindowToggle, childWindow, tray;
+let trayMainWindow, workspaceWindow, tray;
 
 const createTrayWindowToggle = () => {
-  trayWindowToggle = new BrowserWindow({ width: 780, height: 620 });
+  trayMainWindow = new BrowserWindow({
+    width: 200,
+    height: 300,
+    show: true,
+    frame: false,
+    resizable: false,
+    webPreferences: {
+      preload: path.join(__dirname, "preload.js"),
+    },
+  });
   const trayWindowPath =
     env === "dev"
       ? "http://localhost:8080"
       : path.join(app.getAppPath(), "dist", "index.html");
-  trayWindowToggle.loadURL(trayWindowPath);
-  trayWindowToggle.on("closed", () => (trayWindowToggle = null));
+  trayMainWindow.loadURL(trayWindowPath);
+
+  trayMainWindow.on("closed", () => {
+    trayMainWindow = null;
+    tray = null;
+  });
   createTrayIcon();
 };
 
@@ -32,17 +45,33 @@ const createTrayIcon = () => {
       path.join(app.getAppPath(), "src", "assets", "bunny.png")
     )
   );
+  const { x, y } = tray.getBounds();
+  const { width, height } = trayMainWindow.getBounds();
+
+  trayMainWindow.setBounds({
+    x: x - width / 2,
+    y: y - height - 10,
+  });
   tray.setToolTip("Take some screenshots");
+
+  tray.on("click", () => {
+    if (trayMainWindow.isVisible()) trayMainWindow.hide();
+    else trayMainWindow.show();
+  });
 };
 
-const createChildWindow = () => {
-  childWindow = new BrowserWindow({ width: 480, height: 320 });
+const createWorkspaceWindow = () => {
+  workspaceWindow = new BrowserWindow({ width: 700, height: 500 });
   const appUrl = isDev
     ? "http://localhost:3000"
     : `file://${path.join(__dirname, "../electron/tray.html")}`;
-  childWindow.loadURL(appUrl);
-  childWindow.on("closed", () => (childWindow = null));
+  workspaceWindow.loadURL(appUrl);
+  workspaceWindow.on("closed", () => (workspaceWindow = null));
 };
+
+ipcMain.on("open-workspace-window", () => {
+  createWorkspaceWindow();
+});
 
 const menu = new Menu();
 menu.append(

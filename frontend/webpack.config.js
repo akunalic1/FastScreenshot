@@ -14,6 +14,10 @@ const context = {
   module: {
     rules: [
       {
+        test: /\.css/,
+        use: ["style-loader", "css-loader"],
+      },
+      {
         loader: "babel-loader",
         test: /\.js$|jsx/,
       },
@@ -23,3 +27,4 @@ const context = {
 };
 
 module.exports = context;
+
