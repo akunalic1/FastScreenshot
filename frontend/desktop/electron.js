@@ -1,17 +1,9 @@
-const {
-  app,
-  ipcMain,
-  globalShortcut,
-  Menu,
-  MenuItem,
-  BrowserWindow,
-  Tray,
-  nativeImage,
-} = require("electron");
+const { app, globalShortcut, BrowserWindow } = require("electron");
 const path = require("path");
-const isDev = require("electron-is-dev");
+
 const TrayMainWindow = require("./TrayMainWindow");
 const TrayIcon = require("./TrayIcon");
+const setAllIpcMainEvents = require("./ipcMainEvents");
 
 let trayMainWindow = null,
   workspaceWindow = null,
@@ -28,54 +20,9 @@ const createTrayWindowToggle = () => {
     path.join(app.getAppPath(), "src", "assets", "bunny.png"),
     trayMainWindow
   );
+  console.log(tray.trayMainWindow === trayMainWindow, "iste ? ?????");
+  setAllIpcMainEvents(app, workspaceWindow);
 };
-
-const createWorkspaceWindow = () => {
-  workspaceWindow = new BrowserWindow({ width: 700, height: 500 });
-  const appUrl = isDev
-    ? "http://localhost:3000"
-    : `file://${path.join(__dirname, "../electron/tray.html")}`;
-  workspaceWindow.loadURL(appUrl);
-  workspaceWindow.on("closed", () => (workspaceWindow = null));
-};
-
-ipcMain.on("open-workspace-window", () => {
-  if (!workspaceWindow) createWorkspaceWindow();
-});
-
-const menu = new Menu();
-menu.append(
-  new MenuItem([
-    {
-      label: "Electron",
-      submenu: [
-        {
-          role: "help",
-          accelerator:
-            process.platform === "darwin" ? "Alt+Cmd+I" : "Alt+Shift+I",
-          click: () => {
-            console.log("Electron rocks!");
-          },
-        },
-      ],
-    },
-    {
-      label: "Skracenica",
-      submenu: [
-        {
-          role: "help",
-          accelerator:
-            process.platform === "darwin" ? "Alt+Cmd+I" : "Alt+Shift+I",
-          click: () => {
-            console.log("Electron roasdsdsdcks!");
-          },
-        },
-      ],
-    },
-  ])
-);
-
-Menu.setApplicationMenu(menu);
 
 app
   .whenReady()
@@ -88,8 +35,6 @@ app
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
-    trayMainWindow = null;
-    tray = null;
     app.quit();
   }
 });

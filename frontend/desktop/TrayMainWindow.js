@@ -19,8 +19,9 @@ class TrayMainWindow extends BrowserWindow {
   }
 
   onBlur = () => {
-    this.hide();
+    //need to handle blur event
   };
 }
 
 module.exports = TrayMainWindow;
+
