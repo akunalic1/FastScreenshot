@@ -13,7 +13,9 @@ const isDev = require("electron-is-dev");
 const TrayMainWindow = require("./TrayMainWindow");
 const TrayIcon = require("./TrayIcon");
 
-let trayMainWindow, workspaceWindow, tray;
+let trayMainWindow = null,
+  workspaceWindow = null,
+  tray = null;
 const env = "dev";
 
 const createTrayWindowToggle = () => {
@@ -38,7 +40,7 @@ const createWorkspaceWindow = () => {
 };
 
 ipcMain.on("open-workspace-window", () => {
-  createWorkspaceWindow();
+  if (!workspaceWindow) createWorkspaceWindow();
 });
 
 const menu = new Menu();

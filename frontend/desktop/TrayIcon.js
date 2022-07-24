@@ -1,5 +1,4 @@
 const { Tray, nativeImage } = require("electron");
-const path = require("path");
 
 class TrayIcon extends Tray {
   constructor(url, trayMainWindow) {
@@ -30,3 +29,4 @@ class TrayIcon extends Tray {
 }
 
 module.exports = TrayIcon;
+
