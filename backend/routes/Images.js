@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Folders } = require("../models");
+const { Images } = require("../models");
 
 router
   .route("/")
@@ -9,13 +9,14 @@ router
   })
   .post(async (req, res) => {
     const data = req.body;
-    // await Folders.create(data);
-    res.json(req.body);
+    data.date = new Date().toDateString();
+    await Images.create(data);
+    res.json(data);
   });
 
 router.route("/all").get(async (req, res) => {
-  const allFolders = await Folders.findAll();
-  res.send(allFolders);
+  const allImages = await Images.findAll();
+  res.send(allImages);
 });
 
 router.route("/:id").get((req, res) => {

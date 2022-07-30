@@ -5,16 +5,18 @@ const app = express();
 
 const PORT = process.env.PORT || 3001;
 
-//  Routers
-const folderRouter = require("../routes/Folders");
-
 //  Middlewares
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+
+//  Routers
+const folderRouter = require("../routes/Folders");
+const imagesRouter = require("../routes/Images");
 
 //  Routes
 app.use("/folders", folderRouter);
+app.use("/images", imagesRouter);
 
 app.get("/", (req, res) => {
   res.send({ henlo: "henlo" });
