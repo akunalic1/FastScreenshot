@@ -9,7 +9,6 @@ router
   })
   .post(async (req, res) => {
     const data = req.body;
-    console.log("ono sto je poslano", data);
     await Folders.create(data);
     res.json(data);
   });
