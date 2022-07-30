@@ -1,12 +1,20 @@
 module.exports = (sequelize, DataTypes) => {
-  const Folders = sequelize.define(
-    "Folders",
+  const Images = sequelize.define(
+    "Images",
     {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      icon: {
+      url: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      folder: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      date: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -14,15 +22,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      parentFolder: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-      },
     },
     {
       freezeTableName: true,
     }
   );
 
-  return Folders;
+  return Images;
 };
