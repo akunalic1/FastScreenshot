@@ -9,7 +9,7 @@ router
   })
   .post(async (req, res) => {
     const data = req.body;
-    // await Folders.create(data);
+    await Folders.create(data);
     res.json(req.body);
   });
 
