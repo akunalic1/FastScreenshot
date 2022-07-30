@@ -44,7 +44,8 @@ const Content = ({ selectedFolder, setClickedItem }) => {
         onClick={(e) => setClickedItem(image)}
         className="image-content"
         key={image.id}
-        src={image.url}></img>
+        src={image.url}
+      ></img>
     );
   };
 
@@ -56,4 +57,3 @@ const Content = ({ selectedFolder, setClickedItem }) => {
 };
 
 export default Content;
-
