@@ -1,15 +1,24 @@
 const express = require("express");
-const router = express.Router();
+const multer = require("multer");
 const { Images } = require("../models");
+const router = express.Router();
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 router
   .route("/")
-  .get((req, res) => {
-    res.send({ message: "henlooo" });
+  .get(async (req, res) => {
+    const allImages = Images.findAll();
+    res.send(allImages);
   })
-  .post(async (req, res) => {
-    const data = req.body;
-    data.date = new Date().toDateString();
+  .post(upload.single("image"), async (req, res) => {
+    const data = {
+      ...req.body,
+      name: req.file.originalname,
+      type: req.file.mimetype,
+      base64string: req.file.buffer.toString("base64"),
+    };
     await Images.create(data);
     res.json(data);
   });
