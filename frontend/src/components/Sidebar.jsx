@@ -9,6 +9,7 @@ import {
   faImage,
   faFilm,
   faInfo,
+  faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -22,6 +23,7 @@ const icons = {
   "fa-folder-tree": <FontAwesomeIcon icon={faFolderTree} />,
   "fa-image": <FontAwesomeIcon icon={faImage} />,
   "fa-film": <FontAwesomeIcon icon={faFilm} />,
+  "fa-plus": <FontAwesomeIcon icon={faPlus} />,
 };
 
 const upperMenuOptions = [
@@ -58,14 +60,26 @@ const Sidebar = ({
   setSelectedFolder,
 }) => {
   const [folders, setFolders] = useState([]);
+
+  const getAllFolders = async () => {
+    const resp = await axios.get("http://localhost:3001/folders/all");
+    setFolders(resp.data);
+    console.log("stigli folderiii", resp);
+  };
+
   useEffect(() => {
-    const getAllFolders = async () => {
-      const resp = await axios.get("http://localhost:3001/folders/all");
-      setFolders(resp.data);
-      console.log("stigli folderiii", resp);
-    };
     getAllFolders();
   }, []);
+
+  const createFolder = async (event, folderId) => {
+    const folder = await axios.post("http://localhost:3001/folders/", {
+      name: "Default name",
+      icon: "fa-folder",
+      type: "default",
+      parentFolder: folderId,
+    });
+    getAllFolders();
+  };
 
   const renderOneFolder = (folder, depth) => {
     console.log(folder.id);
@@ -76,17 +90,22 @@ const Sidebar = ({
           className={classnames({
             hasSubfolders: !!folder.subfolders,
           })}
-          onClick={(e) => setSelectedFolder(folder)}
         >
           <div
             className={classnames("folder")}
             style={{ marginLeft: `${depth * 16}px` }}
           >
-            <div>
+            <div onClick={(e) => setSelectedFolder(folder)}>
               <i className="folder-icon">{icons[folder.icon]}</i>
               <span>{folder.name}</span>
             </div>
             <p>{folder.amount}</p>
+            <i
+              className="add-folder-icon"
+              onClick={(e) => createFolder(e, folder.id)}
+            >
+              {icons["fa-plus"]}{" "}
+            </i>
           </div>
         </li>
         {!!folder.subfolders && renderFolders(folder.subfolders, depth + 1)}

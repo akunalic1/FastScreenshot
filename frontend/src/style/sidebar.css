@@ -16,8 +16,15 @@
   color: var(--secondary);
 }
 
-.folder-icon {
+.folder-icon,
+.add-folder-icon {
   margin-right: 0.5rem;
+}
+
+.add-folder-icon:hover {
+  background-color: aliceblue;
+  color: var(--dark-shadow-blue);
+  border-radius: 50%;
 }
 
 .sidebar-options,
