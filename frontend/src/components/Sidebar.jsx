@@ -4,27 +4,16 @@ import axios from "axios";
 import {
   faWrench,
   faFolder,
-  faHeart,
-  faFolderTree,
   faImage,
   faFilm,
   faInfo,
-  faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import "./../style/sidebar.css";
+import icons from "../constants/icons";
 
 const classnames = require("classnames");
-
-const icons = {
-  "fa-folder": <FontAwesomeIcon icon={faFolder} />,
-  "fa-heart": <FontAwesomeIcon icon={faHeart} />,
-  "fa-folder-tree": <FontAwesomeIcon icon={faFolderTree} />,
-  "fa-image": <FontAwesomeIcon icon={faImage} />,
-  "fa-film": <FontAwesomeIcon icon={faFilm} />,
-  "fa-plus": <FontAwesomeIcon icon={faPlus} />,
-};
 
 const upperMenuOptions = [
   {
@@ -81,6 +70,11 @@ const Sidebar = ({
     getAllFolders();
   };
 
+  const deleteFolder = async (event, folderId) => {
+    await axios.delete("http://localhost:3001/folders/" + folderId);
+    getAllFolders();
+  };
+
   const renderOneFolder = (folder, depth) => {
     console.log(folder.id);
     return (
@@ -102,9 +96,15 @@ const Sidebar = ({
             <p>{folder.amount}</p>
             <i
               className="add-folder-icon"
+              onClick={(e) => deleteFolder(e, folder.id)}
+            >
+              {icons["fa-trash"]}
+            </i>
+            <i
+              className="add-folder-icon"
               onClick={(e) => createFolder(e, folder.id)}
             >
-              {icons["fa-plus"]}{" "}
+              {icons["fa-plus"]}
             </i>
           </div>
         </li>

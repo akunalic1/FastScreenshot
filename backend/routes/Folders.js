@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { Folders } = require("../models");
+const { Op } = require("sequelize");
 const { findAllSubfolders } = require("../routesHelpers/folderHeplers");
 
 router.route("/").post(async (req, res) => {
@@ -18,9 +19,21 @@ router.route("/all").get(async (req, res) => {
   res.send(allFolders);
 });
 
-router.route("/:id").get((req, res) => {
-  console.log(req.params);
-  res.send({ folder: "folder bre" });
-});
+router
+  .route("/:id")
+  .get((req, res) => {
+    console.log(req.params);
+    res.send({ folder: "folder bre" });
+  })
+  .delete(async (req, res) => {
+    const { id } = req.params;
+    const aaa = await Folders.destroy({
+      where: {
+        [Op.or]: [{ id }, { parentFolder: id }],
+      },
+    });
+
+    res.send({ response: aaa });
+  });
 
 module.exports = router;
