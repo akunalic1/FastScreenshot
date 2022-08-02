@@ -1,4 +1,4 @@
-module.exports = findAllSubfolders = (folders) => {
+const findAllSubfolders = (folders) => {
   return folders
     .map((folder) => {
       const subfolders = folders.filter(
@@ -9,4 +9,8 @@ module.exports = findAllSubfolders = (folders) => {
       return folder;
     })
     .filter((folder) => folder.parentFolder === null);
+};
+
+module.exports = {
+  findAllSubfolders,
 };
