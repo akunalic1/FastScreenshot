@@ -23,6 +23,5 @@ module.exports = (sequelize, DataTypes) => {
       freezeTableName: true,
     }
   );
-
   return Folders;
 };

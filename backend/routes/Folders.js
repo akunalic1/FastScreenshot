@@ -1,20 +1,21 @@
 const express = require("express");
 const router = express.Router();
 const { Folders } = require("../models");
+const { findAllSubfolders } = require("../routesHelpers/folderHeplers");
 
-router
-  .route("/")
-  .get((req, res) => {
-    res.send({ message: "henlooo" });
-  })
-  .post(async (req, res) => {
-    const data = req.body;
-    await Folders.create(data);
-    res.json(req.body);
-  });
+router.route("/").post(async (req, res) => {
+  const data = req.body;
+  await Folders.create(data);
+  res.json(req.body);
+});
 
 router.route("/all").get(async (req, res) => {
-  const allFolders = await Folders.findAll();
+  let allFolders = await Folders.findAll({
+    where: {},
+  });
+  allFolders = JSON.parse(JSON.stringify(allFolders));
+  allFolders = findAllSubfolders(allFolders);
+
   res.send(allFolders);
 });
 
