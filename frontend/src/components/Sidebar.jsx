@@ -53,7 +53,6 @@ const Sidebar = ({
   const getAllFolders = async () => {
     const resp = await axios.get("http://localhost:3001/folders/all");
     setFolders(resp.data);
-    console.log("stigli folderiii", resp);
   };
 
   useEffect(() => {
@@ -61,10 +60,10 @@ const Sidebar = ({
   }, []);
 
   const createFolder = async (event, folderId) => {
-    const folder = await axios.post("http://localhost:3001/folders/", {
+    await axios.post("http://localhost:3001/folders/", {
       name: "Default name",
       icon: "fa-folder",
-      type: "default",
+      type: "custom",
       parentFolder: folderId,
     });
     getAllFolders();
@@ -94,12 +93,14 @@ const Sidebar = ({
               <span>{folder.name}</span>
             </div>
             <p>{folder.amount}</p>
-            <i
-              className="add-folder-icon"
-              onClick={(e) => deleteFolder(e, folder.id)}
-            >
-              {icons["fa-trash"]}
-            </i>
+            {folder.type !== "default" && (
+              <i
+                className="add-folder-icon"
+                onClick={(e) => deleteFolder(e, folder.id)}
+              >
+                {icons["fa-trash"]}
+              </i>
+            )}
             <i
               className="add-folder-icon"
               onClick={(e) => createFolder(e, folder.id)}
