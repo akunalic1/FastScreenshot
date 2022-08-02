@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 import {
   faWrench,
@@ -208,6 +209,15 @@ const Sidebar = ({
   setOpenedMenuOption,
   setSelectedFolder,
 }) => {
+  const [folders, setFolders] = useState([]);
+  useEffect(() => {
+    const getAllFolders = async () => {
+      const resp = axios.get("http://localhost:3001/folders/all");
+      setFolders(resp.data);
+    };
+    getAllFolders();
+  }, []);
+
   const renderOneFolder = (folder) => {
     console.log(folder.id);
     return (
@@ -217,11 +227,13 @@ const Sidebar = ({
           className={classnames({
             hasSubfolders: !!folder.subfolders,
           })}
-          onClick={(e) => setSelectedFolder(folder)}>
+          onClick={(e) => setSelectedFolder(folder)}
+        >
           <div
             className={classnames("folder", {
               isSubfolder: !!folder.parentFolder,
-            })}>
+            })}
+          >
             <div>
               <i className="folder-icon">{folder.icon}</i>
               <span>{folder.name}</span>
@@ -325,7 +337,8 @@ const Sidebar = ({
         className={classnames("sidebar", "is-fullheight", "hero", {
           showSidebar: isSidebarOpened,
           hideSidebar: !isSidebarOpened,
-        })}>
+        })}
+      >
         <div className="title">{openedMenuOption}</div>
         {renderSidebar()}
       </div>
