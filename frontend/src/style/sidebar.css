@@ -6,10 +6,6 @@
   cursor: pointer;
 }
 
-.isSubfolder {
-  margin-left: 1rem;
-}
-
 .hasSubfolders {
   background-color: var(--dark-shadow-blue);
 }

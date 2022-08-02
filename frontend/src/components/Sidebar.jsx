@@ -67,7 +67,7 @@ const Sidebar = ({
     getAllFolders();
   }, []);
 
-  const renderOneFolder = (folder) => {
+  const renderOneFolder = (folder, depth) => {
     console.log(folder.id);
     return (
       <div>
@@ -79,9 +79,8 @@ const Sidebar = ({
           onClick={(e) => setSelectedFolder(folder)}
         >
           <div
-            className={classnames("folder", {
-              isSubfolder: !!folder.parentFolder,
-            })}
+            className={classnames("folder")}
+            style={{ marginLeft: `${depth * 16}px` }}
           >
             <div>
               <i className="folder-icon">{icons[folder.icon]}</i>
@@ -90,13 +89,13 @@ const Sidebar = ({
             <p>{folder.amount}</p>
           </div>
         </li>
-        {!!folder.subfolders && renderFolders(folder.subfolders)}
+        {!!folder.subfolders && renderFolders(folder.subfolders, depth + 1)}
       </div>
     );
   };
 
-  const renderFolders = (photoFolders) => {
-    return photoFolders?.map((folder) => renderOneFolder(folder));
+  const renderFolders = (photoFolders, depth) => {
+    return photoFolders?.map((folder) => renderOneFolder(folder, depth));
   };
 
   const menuIconHandler = (e, option) => {
@@ -156,7 +155,8 @@ const Sidebar = ({
               ? defaultPhotoFolders
               : openedMenuOption === "Videos"
               ? defaultVideoFolders
-              : [...defaultPhotoFolders, ...defaultVideoFolders]
+              : [...defaultPhotoFolders, ...defaultVideoFolders],
+            0
           )}
         </ul>
         <div className="sidebar-separator"></div>
@@ -166,7 +166,8 @@ const Sidebar = ({
               ? customPhotoFolders
               : openedMenuOption === "Videos"
               ? customVideoFolders
-              : [...customPhotoFolders, ...customVideoFolders]
+              : [...customPhotoFolders, ...customVideoFolders],
+            0
           )}
         </ul>
       </>
