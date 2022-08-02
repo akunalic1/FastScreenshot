@@ -16,166 +16,14 @@ import "./../style/sidebar.css";
 
 const classnames = require("classnames");
 
-const defaultFolders = [
-  {
-    id: 1,
-    name: "All",
-    type: "default",
-    icon: <FontAwesomeIcon icon={faFolder} />,
-    subfolders: null,
-    parentFolder: null,
-    amount: 123,
-    items: [
-      {
-        id: 1,
-        name: "some name hdjshd",
-        url: "https://picsum.photos/id/1/200/300",
-        folder: 1,
-        date: new Date(),
-        type: "JPG",
-      },
-      {
-        id: 2,
-        name: "some name hdjshd",
-        url: "https://picsum.photos/id/1000/200/300",
-        folder: 1,
-        date: new Date(),
-        type: "JPG",
-      },
-      {
-        id: 3,
-        name: "some name hdjshd",
-        url: "https://picsum.photos/id/167/200/300",
-        folder: 1,
-        date: new Date(),
-        type: "JPG",
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: "Favorite",
-    type: "default",
-    icon: <FontAwesomeIcon icon={faHeart} />,
-    subfolders: null,
-    parentFolder: null,
-    amount: 17,
-  },
-  {
-    id: 4,
-    name: "Photos",
-    type: "default",
-    icon: <FontAwesomeIcon icon={faFolder} />,
-    subfolders: null,
-    parentFolder: null,
-    amount: 12,
-  },
-  {
-    id: 8,
-    name: "All videos",
-    type: "default",
-    icon: <FontAwesomeIcon icon={faFolder} />,
-    subfolders: null,
-    parentFolder: null,
-    amount: 1,
-  },
-  {
-    id: 9,
-    name: "Screen recordings",
-    type: "default",
-    icon: <FontAwesomeIcon icon={faFolder} />,
-    subfolders: null,
-    parentFolder: null,
-    amount: 1,
-  },
-];
+const icons = {
+  "fa-folder": <FontAwesomeIcon icon={faFolder} />,
+  "fa-heart": <FontAwesomeIcon icon={faHeart} />,
+  "fa-folder-tree": <FontAwesomeIcon icon={faFolderTree} />,
+  "fa-image": <FontAwesomeIcon icon={faImage} />,
+  "fa-film": <FontAwesomeIcon icon={faFilm} />,
+};
 
-const photoFolders = [
-  {
-    id: 1,
-    name: "All",
-    type: "default",
-    icon: <FontAwesomeIcon icon={faFolder} />,
-    subfolders: null,
-    parentFolder: null,
-    amount: 123,
-  },
-  {
-    id: 2,
-    name: "Favorite",
-    type: "default",
-    icon: <FontAwesomeIcon icon={faHeart} />,
-    subfolders: null,
-    parentFolder: null,
-    amount: 17,
-  },
-  {
-    id: 3,
-    name: "My photoFolders",
-    type: "custom",
-    icon: <FontAwesomeIcon icon={faFolderTree} />,
-    subfolders: [
-      {
-        id: 6,
-        name: "Honey",
-        type: "default",
-        icon: <FontAwesomeIcon icon={faFolder} />,
-        subfolders: null,
-        parentFolder: 3,
-        amount: 323,
-      },
-      {
-        id: 7,
-        name: "beee",
-        type: "default",
-        icon: <FontAwesomeIcon icon={faFolder} />,
-        subfolders: null,
-        parentFolder: 3,
-        amount: 323,
-      },
-    ],
-    amount: 123,
-  },
-  {
-    id: 4,
-    name: "Photos",
-    type: "default",
-    icon: <FontAwesomeIcon icon={faFolder} />,
-    subfolders: null,
-    parentFolder: null,
-    amount: 12,
-  },
-];
-
-const videoFolders = [
-  {
-    id: 8,
-    name: "All videos",
-    type: "default",
-    icon: <FontAwesomeIcon icon={faFolder} />,
-    subfolders: null,
-    parentFolder: null,
-    amount: 1,
-  },
-  {
-    id: 9,
-    name: "Screen recordings",
-    type: "default",
-    icon: <FontAwesomeIcon icon={faFolder} />,
-    subfolders: null,
-    parentFolder: null,
-    amount: 1,
-  },
-  {
-    id: 10,
-    name: "Trash",
-    type: "default",
-    icon: <FontAwesomeIcon icon={faFolder} />,
-    subfolders: null,
-    parentFolder: null,
-    amount: 1878,
-  },
-];
 const upperMenuOptions = [
   {
     name: "Folders",
@@ -212,8 +60,9 @@ const Sidebar = ({
   const [folders, setFolders] = useState([]);
   useEffect(() => {
     const getAllFolders = async () => {
-      const resp = axios.get("http://localhost:3001/folders/all");
+      const resp = await axios.get("http://localhost:3001/folders/all");
       setFolders(resp.data);
+      console.log("stigli folderiii", resp);
     };
     getAllFolders();
   }, []);
@@ -235,7 +84,7 @@ const Sidebar = ({
             })}
           >
             <div>
-              <i className="folder-icon">{folder.icon}</i>
+              <i className="folder-icon">{icons[folder.icon]}</i>
               <span>{folder.name}</span>
             </div>
             <p>{folder.amount}</p>
@@ -247,7 +96,7 @@ const Sidebar = ({
   };
 
   const renderFolders = (photoFolders) => {
-    return photoFolders.map((folder) => renderOneFolder(folder));
+    return photoFolders?.map((folder) => renderOneFolder(folder));
   };
 
   const menuIconHandler = (e, option) => {
@@ -292,18 +141,14 @@ const Sidebar = ({
   };
 
   const renderSidebar = () => {
-    const defaultPhotoFolders = photoFolders.filter(
-      (folder) => folder.type === "default"
-    );
-    const customPhotoFolders = photoFolders.filter(
-      (folder) => folder.type !== "default"
-    );
-    const defaultVideoFolders = videoFolders.filter(
-      (folder) => folder.type === "default"
-    );
-    const customVideoFolders = videoFolders.filter(
-      (folder) => folder.type !== "default"
-    );
+    const defaultPhotoFolders =
+      folders?.filter((folder) => folder.type === "default") || [];
+    const customPhotoFolders =
+      folders?.filter((folder) => folder.type !== "default") || [];
+    const defaultVideoFolders =
+      videoFolders.filter((folder) => folder.type === "default") || [];
+    const customVideoFolders =
+      videoFolders.filter((folder) => folder.type !== "default") || [];
 
     return (
       <>
