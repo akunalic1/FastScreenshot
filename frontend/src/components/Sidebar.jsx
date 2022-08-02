@@ -145,10 +145,8 @@ const Sidebar = ({
       folders?.filter((folder) => folder.type === "default") || [];
     const customPhotoFolders =
       folders?.filter((folder) => folder.type !== "default") || [];
-    const defaultVideoFolders =
-      videoFolders.filter((folder) => folder.type === "default") || [];
-    const customVideoFolders =
-      videoFolders.filter((folder) => folder.type !== "default") || [];
+    const defaultVideoFolders = [];
+    const customVideoFolders = [];
 
     return (
       <>
