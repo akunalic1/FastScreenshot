@@ -4,9 +4,8 @@ const { Folders } = require("../models");
 const { findAllSubfolders } = require("../routesHelpers/folderHeplers");
 
 router.route("/").post(async (req, res) => {
-  const data = req.body;
-  await Folders.create(data);
-  res.json(req.body);
+  const folder = await Folders.create(req.body);
+  res.json(folder);
 });
 
 router.route("/all").get(async (req, res) => {
