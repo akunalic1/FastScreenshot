@@ -94,19 +94,21 @@ const Sidebar = ({
             </div>
             <p>{folder.amount}</p>
             {folder.type !== "default" && (
-              <i
-                className="add-folder-icon"
-                onClick={(e) => deleteFolder(e, folder.id)}
-              >
-                {icons["fa-trash"]}
-              </i>
+              <>
+                <i
+                  className="add-folder-icon"
+                  onClick={(e) => deleteFolder(e, folder.id)}
+                >
+                  {icons["fa-trash"]}
+                </i>
+                <i
+                  className="add-folder-icon"
+                  onClick={(e) => createFolder(e, folder.id)}
+                >
+                  {icons["fa-plus"]}
+                </i>
+              </>
             )}
-            <i
-              className="add-folder-icon"
-              onClick={(e) => createFolder(e, folder.id)}
-            >
-              {icons["fa-plus"]}
-            </i>
           </div>
         </li>
         {!!folder.subfolders && renderFolders(folder.subfolders, depth + 1)}
