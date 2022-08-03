@@ -46,3 +46,7 @@
   gap: 0.5rem;
   border-radius: 0.5rem;
 }
+
+.custom-folder-list {
+  overflow-y: scroll;
+}

@@ -62,7 +62,9 @@ body {
 .information {
   border: 1px solid var(--secondary);
   height: 100%;
-  width: 200px;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
   justify-content: normal;
   border-radius: 0.5rem;
   padding: 0.5rem;
@@ -112,4 +114,3 @@ body {
   border-radius: 20%;
   border-bottom: 1px solid var(--secondary);
 }
-

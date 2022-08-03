@@ -182,7 +182,7 @@ const Sidebar = ({
           )}
         </ul>
         <div className="sidebar-separator"></div>
-        <ul style={{ listStyle: "none" }}>
+        <ul className="custom-folder-list" style={{ listStyle: "none" }}>
           {renderFolders(
             openedMenuOption === "Photos"
               ? customPhotoFolders
