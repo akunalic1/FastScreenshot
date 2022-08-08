@@ -19,8 +19,8 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         defaultValue: new Date().toDateString(),
       },
-      base64string: {
-        type: DataTypes.TEXT,
+      size: {
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       type: {
