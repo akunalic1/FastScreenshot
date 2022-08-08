@@ -30,7 +30,8 @@ const Content = ({ selectedFolder, setClickedItem }) => {
         onClick={(e) => setClickedItem(image)}
         className="image-content"
         key={image.id}
-        src={`data:image/png;base64,${image.base64string}`}
+        // src={`data:image/png;base64,${image.base64string}`}
+        src={require("../../../backend/public/images" + image.url)}
       ></img>
     );
   };

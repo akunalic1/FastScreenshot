@@ -15,7 +15,7 @@ router
       ...req.body,
       name: req.file.originalname,
       type: req.file.mimetype,
-      url: req.file.path,
+      url: "/" + req.file.filename,
       size: req.file.size,
     };
     await Images.create(data);
@@ -28,7 +28,7 @@ router.route("/all").get(async (req, res) => {
 });
 
 router.route("/:id").get((req, res) => {
-  res.send({ folder: "folder bre" });
+  res.send({ folder: "slika" });
 });
 
 module.exports = router;
