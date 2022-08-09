@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import "../style/modal.css";
 import IconsDropdow from "./IconsDropdow";
-import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import classNames from "classnames";
+import axios from "axios";
+import "../style/modal.css";
+import "../style/app.css";
 
 const ModalCreateEditFolder = ({
   parentFolder,
@@ -54,22 +55,28 @@ const ModalCreateEditFolder = ({
         })}
       >
         <div className="modal">
-          <FontAwesomeIcon
-            onClick={handleCloseModal}
-            icon={faClose}
-          ></FontAwesomeIcon>
-          <form method="POST">
-            <input
-              value={folderName}
-              onChange={handleChangeFolderName}
-              placeholder="Folder name"
-            ></input>
-            <IconsDropdow
-              selectedIcon={selectedIcon}
-              setSelectedIcon={setSelectedIcon}
-            ></IconsDropdow>
-            <button onClick={handleSumbit}>Submit</button>
-          </form>
+          <div className="modal-wrapper">
+            <FontAwesomeIcon
+              className="sidebar-button modal-close-button"
+              onClick={handleCloseModal}
+              icon={faClose}
+            ></FontAwesomeIcon>
+            <form method="POST">
+              <input
+                className="folder-name-input"
+                value={folderName}
+                onChange={handleChangeFolderName}
+                placeholder="Folder name"
+              ></input>
+              <IconsDropdow
+                selectedIcon={selectedIcon}
+                setSelectedIcon={setSelectedIcon}
+              ></IconsDropdow>
+              <button className="submit-folder-button" onClick={handleSumbit}>
+                Submit
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
