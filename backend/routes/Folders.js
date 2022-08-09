@@ -19,6 +19,15 @@ router.route("/all").get(async (req, res) => {
   res.send(allFolders);
 });
 
+router.route("/root").get(async (req, res) => {
+  let allFolder = await Folders.findOne({
+    where: {
+      name: "All",
+    },
+  });
+  res.json(allFolder);
+});
+
 router
   .route("/:id")
   .get((req, res) => {

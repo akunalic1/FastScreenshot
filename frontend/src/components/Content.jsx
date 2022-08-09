@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Buffer } from "buffer";
 
 import "./../style/workspace.css";
 
 const classnames = require("classnames");
 
-const Content = ({ selectedFolder, setClickedItem }) => {
+const Content = ({ selectedFolder, setClickedItem, allFolderId }) => {
   const [items, setItems] = useState([]);
   const [allImages, setAllImages] = useState([]);
 
@@ -20,7 +19,13 @@ const Content = ({ selectedFolder, setClickedItem }) => {
   }, []);
 
   useEffect(() => {
-    setItems(allImages.filter((image) => image.folder === selectedFolder?.id));
+    if (allFolderId != selectedFolder?.id) {
+      setItems(
+        allImages.filter((image) => image.folder === selectedFolder?.id)
+      );
+    } else {
+      setItems(allImages);
+    }
   }, [selectedFolder]);
 
   const renderOneImage = (image) => {
@@ -30,9 +35,22 @@ const Content = ({ selectedFolder, setClickedItem }) => {
         onClick={(e) => setClickedItem(image)}
         className="image-content"
         key={image.id}
-        // src={`data:image/png;base64,${image.base64string}`}
         src={require("../../../backend/public/images" + image.url)}
       ></img>
+    );
+  };
+
+  const renderOneVideo = (video) => {
+    console.log("render one  item ", video);
+    return (
+      <video
+        controls
+        autoplay
+        onClick={(e) => setClickedItem(video)}
+        className="video-content"
+        key={video.id}
+        src={require("../../../backend/public/videos" + video.url)}
+      ></video>
     );
   };
 

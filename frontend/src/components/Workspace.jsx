@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-import TopBar from "./Topbar.jsx";
 import Sidebar from "./Sidebar.jsx";
 import Content from "./Content.jsx";
 import Details from "./Details.jsx";
 import { useNavigate } from "react-router";
+import axios from "axios";
 
 const Workspace = ({
   isLoggedIn,
@@ -16,6 +16,16 @@ const Workspace = ({
   const [openedMenuOption, setOpenedMenuOption] = useState("Folders");
   const [clickedItem, setClickedItem] = useState(null);
   const [selectedFolder, setSelectedFolder] = useState(null);
+  const [allFolderId, setAllFolderId] = useState(null);
+
+  useEffect(() => {
+    const getRootFolder = async () => {
+      const resp = await axios.get("http://localhost:3001/folders/root");
+      setSelectedFolder(resp.data);
+      setAllFolderId(resp.data.id);
+    };
+    getRootFolder();
+  }, []);
 
   useEffect(() => {
     if (!isLoggedIn) navigate("/login");
@@ -35,6 +45,7 @@ const Workspace = ({
         openedMenuOption={openedMenuOption}
         setOpenedMenuOption={setOpenedMenuOption}
         selectedFolder={selectedFolder}
+        allFolderId={allFolderId}
       />
       <Details areDetailsOpened={areDetailsOpened} item={clickedItem}></Details>
     </div>

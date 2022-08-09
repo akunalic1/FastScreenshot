@@ -13,10 +13,12 @@ app.use(cors());
 //  Routers
 const folderRouter = require("../routes/Folders");
 const imagesRouter = require("../routes/Images");
+const videosRouter = require("../routes/Videos");
 
 //  Routes
 app.use("/folders", folderRouter);
 app.use("/images", imagesRouter);
+app.use("/videos", videosRouter);
 
 app.get("/", (req, res) => {
   res.send({ henlo: "henlo" });
