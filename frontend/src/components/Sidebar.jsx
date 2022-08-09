@@ -53,9 +53,10 @@ const Sidebar = ({
   setOpenModal,
   createOrEditModal,
   setCreateOrEditModal,
+  setParentFolderId,
+  folders,
+  setFolders,
 }) => {
-  const [folders, setFolders] = useState([]);
-
   const getAllFolders = async () => {
     const resp = await axios.get("http://localhost:3001/folders/all");
     setFolders(resp.data);
@@ -78,6 +79,7 @@ const Sidebar = ({
           setOpenModal={setOpenModal}
           createOrEditModal={createOrEditModal}
           setCreateOrEditModal={setCreateOrEditModal}
+          setParentFolderId={setParentFolderId}
         />
         {!!folder.subfolders && renderFolders(folder.subfolders, depth + 1)}
       </div>

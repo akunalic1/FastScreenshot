@@ -20,6 +20,8 @@ const Workspace = ({
   const [allFolderId, setAllFolderId] = useState(null);
   const [openModal, setOpenModal] = useState(false);
   const [createOrEditModal, setCreateOrEditModal] = useState("create");
+  const [parentFolderId, setParentFolderId] = useState(null);
+  const [folders, setFolders] = useState([]);
 
   useEffect(() => {
     const getRootFolder = async () => {
@@ -46,6 +48,9 @@ const Workspace = ({
         setOpenModal={setOpenModal}
         createOrEditModal={createOrEditModal}
         setCreateOrEditModal={setCreateOrEditModal}
+        setParentFolderId={setParentFolderId}
+        folders={folders}
+        setFolders={setFolders}
       />
       <Content
         setClickedItem={setClickedItem}
@@ -60,6 +65,8 @@ const Workspace = ({
         setOpenModal={setOpenModal}
         createOrEditModal={createOrEditModal}
         setCreateOrEditModal={setCreateOrEditModal}
+        parentFolderId={parentFolderId}
+        setFolders={setFolders}
       ></ModalCreateEditFolder>
     </div>
   );

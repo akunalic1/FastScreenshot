@@ -1,6 +1,5 @@
 import icons from "../constants/icons";
 import axios from "axios";
-
 import React, { useState } from "react";
 const classnames = require("classnames");
 
@@ -13,6 +12,7 @@ const FolderSidebarItem = ({
   setOpenModal,
   createOrEditModal,
   setCreateOrEditModal,
+  setParentFolderId,
 }) => {
   const [openMoreOptions, setOpenMoreOptions] = useState(false);
 
@@ -23,13 +23,9 @@ const FolderSidebarItem = ({
 
   const createFolder = async (event, folderId) => {
     setOpenModal(!openModal);
-    await axios.post("http://localhost:3001/folders/", {
-      name: "Default name",
-      icon: "fa-folder",
-      type: "custom",
-      parentFolder: folderId,
-    });
-    getAllFolders();
+    setCreateOrEditModal("create");
+    setParentFolderId(folderId);
+    //getAllFolders();
   };
 
   const handleToggleMoreOptions = () => {
