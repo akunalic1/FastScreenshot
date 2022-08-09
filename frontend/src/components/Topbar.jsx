@@ -22,16 +22,18 @@ const TopBar = ({
             className={classnames("sidebar-button", {
               "rotate-sidebar-button": isSidebarOpened,
             })}
-            onClick={(e) => setIsSidebarOpened(!isSidebarOpened)}>
+            onClick={(e) => setIsSidebarOpened(!isSidebarOpened)}
+          >
             <FontAwesomeIcon icon={faBars} />
           </button>
-          <div className="logo">loogo</div>
+          <div className="logo"></div>
         </div>
         <button
           className={classnames("sidebar-button", {
             "rotate-Information-button": areDetailsOpened,
           })}
-          onClick={(e) => setAreDetailsOpened(!areDetailsOpened)}>
+          onClick={(e) => setAreDetailsOpened(!areDetailsOpened)}
+        >
           <FontAwesomeIcon icon={faBars} />
         </button>
       </div>

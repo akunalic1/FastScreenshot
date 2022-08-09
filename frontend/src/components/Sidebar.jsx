@@ -139,22 +139,28 @@ const Sidebar = ({
       <>
         <div className="upper">
           {upperMenuOptions.map((option) => (
-            <FontAwesomeIcon
-              values={option.name}
-              onClick={(e) => menuIconHandler(e, option)}
-              className="menu-icon"
-              icon={option.icon}
-            />
+            <div className="icon-wrapper">
+              <span className="tooltip">{option.name}</span>
+              <FontAwesomeIcon
+                values={option.name}
+                onClick={(e) => menuIconHandler(e, option)}
+                className="menu-icon"
+                icon={option.icon}
+              />
+            </div>
           ))}
         </div>
         <div className="lower">
           {lowerMenuOptions.map((option) => (
-            <FontAwesomeIcon
-              values={option.name}
-              onClick={(e) => menuIconHandler(e, option)}
-              className="menu-icon"
-              icon={option.icon}
-            />
+            <div className="icon-wrapper">
+              <span className="tooltip">{option.name}</span>
+              <FontAwesomeIcon
+                values={option.name}
+                onClick={(e) => menuIconHandler(e, option)}
+                className="menu-icon"
+                icon={option.icon}
+              />
+            </div>
           ))}
         </div>
       </>

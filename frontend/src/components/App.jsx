@@ -17,28 +17,17 @@ const App = () => {
       <Route
         path="/"
         element={
-          <TopBar
+          <Workspace
+            isLoggedIn={isLoggedIn}
             isSidebarOpened={isSidebarOpened}
             setIsSidebarOpened={setIsSidebarOpened}
             areDetailsOpened={areDetailsOpened}
-            setAreDetailsOpened={setAreDetailsOpened}
           />
-        }>
-        <Route
-          path="/"
-          element={
-            <Workspace
-              isLoggedIn={isLoggedIn}
-              isSidebarOpened={isSidebarOpened}
-              setIsSidebarOpened={setIsSidebarOpened}
-              areDetailsOpened={areDetailsOpened}
-            />
-          }></Route>
-        <Route path="login" element={<LogIn />}></Route>
-      </Route>
+        }
+      ></Route>
+      <Route path="login" element={<LogIn />}></Route>
     </Routes>
   );
 };
 
 export default App;
-
