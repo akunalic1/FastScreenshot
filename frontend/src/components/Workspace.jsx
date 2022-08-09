@@ -5,6 +5,7 @@ import Content from "./Content.jsx";
 import Details from "./Details.jsx";
 import { useNavigate } from "react-router";
 import axios from "axios";
+import ModalCreateEditFolder from "./ModalCreateEditFolder.jsx";
 
 const Workspace = ({
   isLoggedIn,
@@ -17,6 +18,8 @@ const Workspace = ({
   const [clickedItem, setClickedItem] = useState(null);
   const [selectedFolder, setSelectedFolder] = useState(null);
   const [allFolderId, setAllFolderId] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
+  const [createOrEditModal, setCreateOrEditModal] = useState("create");
 
   useEffect(() => {
     const getRootFolder = async () => {
@@ -39,6 +42,10 @@ const Workspace = ({
         openedMenuOption={openedMenuOption}
         setOpenedMenuOption={setOpenedMenuOption}
         setSelectedFolder={setSelectedFolder}
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+        createOrEditModal={createOrEditModal}
+        setCreateOrEditModal={setCreateOrEditModal}
       />
       <Content
         setClickedItem={setClickedItem}
@@ -48,6 +55,12 @@ const Workspace = ({
         allFolderId={allFolderId}
       />
       <Details areDetailsOpened={areDetailsOpened} item={clickedItem}></Details>
+      <ModalCreateEditFolder
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+        createOrEditModal={createOrEditModal}
+        setCreateOrEditModal={setCreateOrEditModal}
+      ></ModalCreateEditFolder>
     </div>
   );
 };

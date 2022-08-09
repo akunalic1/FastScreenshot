@@ -9,6 +9,10 @@ const FolderSidebarItem = ({
   depth,
   setSelectedFolder,
   getAllFolders,
+  openModal,
+  setOpenModal,
+  createOrEditModal,
+  setCreateOrEditModal,
 }) => {
   const [openMoreOptions, setOpenMoreOptions] = useState(false);
 
@@ -18,6 +22,7 @@ const FolderSidebarItem = ({
   };
 
   const createFolder = async (event, folderId) => {
+    setOpenModal(!openModal);
     await axios.post("http://localhost:3001/folders/", {
       name: "Default name",
       icon: "fa-folder",

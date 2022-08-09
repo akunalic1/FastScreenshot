@@ -49,6 +49,10 @@ const Sidebar = ({
   openedMenuOption,
   setOpenedMenuOption,
   setSelectedFolder,
+  openModal,
+  setOpenModal,
+  createOrEditModal,
+  setCreateOrEditModal,
 }) => {
   const [folders, setFolders] = useState([]);
 
@@ -70,6 +74,10 @@ const Sidebar = ({
           depth={depth}
           setSelectedFolder={setSelectedFolder}
           getAllFolders={getAllFolders}
+          openModal={openModal}
+          setOpenModal={setOpenModal}
+          createOrEditModal={createOrEditModal}
+          setCreateOrEditModal={setCreateOrEditModal}
         />
         {!!folder.subfolders && renderFolders(folder.subfolders, depth + 1)}
       </div>
