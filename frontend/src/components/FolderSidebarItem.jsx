@@ -12,7 +12,7 @@ const FolderSidebarItem = ({
   setOpenModal,
   createOrEditModal,
   setCreateOrEditModal,
-  setParentFolderId,
+  setParentFolder,
 }) => {
   const [openMoreOptions, setOpenMoreOptions] = useState(false);
 
@@ -21,10 +21,10 @@ const FolderSidebarItem = ({
     getAllFolders();
   };
 
-  const createFolder = async (event, folderId) => {
+  const createFolder = async (event, folder) => {
     setOpenModal(!openModal);
     setCreateOrEditModal("create");
-    setParentFolderId(folderId);
+    setParentFolder(folder);
     handleToggleMoreOptions();
   };
 
@@ -72,7 +72,7 @@ const FolderSidebarItem = ({
               </i>
               <i
                 className="add-folder-icon"
-                onClick={(e) => createFolder(e, folder.id)}
+                onClick={(e) => createFolder(e, folder)}
               >
                 {icons["fa-plus"]}
               </i>

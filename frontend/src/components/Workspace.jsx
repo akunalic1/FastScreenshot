@@ -20,7 +20,7 @@ const Workspace = ({
   const [allFolderId, setAllFolderId] = useState(null);
   const [openModal, setOpenModal] = useState(false);
   const [createOrEditModal, setCreateOrEditModal] = useState("create");
-  const [parentFolderId, setParentFolderId] = useState(null);
+  const [parentFolder, setParentFolder] = useState(null);
   const [folders, setFolders] = useState([]);
 
   useEffect(() => {
@@ -48,7 +48,7 @@ const Workspace = ({
         setOpenModal={setOpenModal}
         createOrEditModal={createOrEditModal}
         setCreateOrEditModal={setCreateOrEditModal}
-        setParentFolderId={setParentFolderId}
+        setParentFolder={setParentFolder}
         folders={folders}
         setFolders={setFolders}
       />
@@ -65,7 +65,7 @@ const Workspace = ({
         setOpenModal={setOpenModal}
         createOrEditModal={createOrEditModal}
         setCreateOrEditModal={setCreateOrEditModal}
-        parentFolderId={parentFolderId}
+        parentFolder={parentFolder}
         setFolders={setFolders}
       ></ModalCreateEditFolder>
     </div>

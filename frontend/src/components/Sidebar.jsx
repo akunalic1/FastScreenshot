@@ -53,7 +53,7 @@ const Sidebar = ({
   setOpenModal,
   createOrEditModal,
   setCreateOrEditModal,
-  setParentFolderId,
+  setParentFolder,
   folders,
   setFolders,
 }) => {
@@ -79,7 +79,7 @@ const Sidebar = ({
           setOpenModal={setOpenModal}
           createOrEditModal={createOrEditModal}
           setCreateOrEditModal={setCreateOrEditModal}
-          setParentFolderId={setParentFolderId}
+          setParentFolder={setParentFolder}
         />
         {!!folder.subfolders && renderFolders(folder.subfolders, depth + 1)}
       </div>
@@ -87,6 +87,7 @@ const Sidebar = ({
   };
 
   const renderFolders = (photoFolders, depth) => {
+    console.log("foldeir za rendanje ", photoFolders);
     return photoFolders?.map((folder) => renderOneFolder(folder, depth));
   };
 
@@ -139,11 +140,21 @@ const Sidebar = ({
 
   const renderSidebar = () => {
     const defaultPhotoFolders =
-      folders?.filter((folder) => folder.type === "default") || [];
+      folders?.filter(
+        (folder) => folder.type === "default" && folder.category === "photo"
+      ) || [];
     const customPhotoFolders =
-      folders?.filter((folder) => folder.type !== "default") || [];
-    const defaultVideoFolders = [];
-    const customVideoFolders = [];
+      folders?.filter(
+        (folder) => folder.type !== "default" && folder.category === "photo"
+      ) || [];
+    const defaultVideoFolders =
+      folders?.filter(
+        (folder) => folder.type === "default" && folder.category === "video"
+      ) || [];
+    const customVideoFolders =
+      folders?.filter(
+        (folder) => folder.type !== "default" && folder.category === "video"
+      ) || [];
 
     return (
       <>

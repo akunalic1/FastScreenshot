@@ -7,7 +7,7 @@ import { faClose } from "@fortawesome/free-solid-svg-icons";
 import classNames from "classnames";
 
 const ModalCreateEditFolder = ({
-  parentFolderId,
+  parentFolder,
   openModal,
   setOpenModal,
   setFolders,
@@ -20,7 +20,8 @@ const ModalCreateEditFolder = ({
       name: folderName,
       icon: selectedIcon?.value,
       type: "custom",
-      parentFolder: parentFolderId,
+      parentFolder: parentFolder?.id,
+      category: parentFolder?.category,
     });
   };
 
