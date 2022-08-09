@@ -37,6 +37,7 @@ const ModalCreateEditFolder = ({
     e.preventDefault();
     await addFolderToDb();
     setOpenModal(false);
+    setfolderName("");
     await getAllFolders();
   };
 

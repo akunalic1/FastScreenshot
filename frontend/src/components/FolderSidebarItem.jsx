@@ -25,12 +25,13 @@ const FolderSidebarItem = ({
     setOpenModal(!openModal);
     setCreateOrEditModal("create");
     setParentFolderId(folderId);
-    //getAllFolders();
+    handleToggleMoreOptions();
   };
 
   const handleToggleMoreOptions = () => {
     setOpenMoreOptions(!openMoreOptions);
   };
+
   return (
     <li
       key={folder.id}

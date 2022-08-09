@@ -1,9 +1,17 @@
 import { icon } from "@fortawesome/fontawesome-svg-core";
-import React from "react";
+import React, { useEffect } from "react";
 import icons from "../constants/icons";
 import Select from "react-select";
 
 const IconsDropdow = ({ selectedIcon, setSelectedIcon }) => {
+  useEffect(() => {
+    setSelectedIcon({
+      value: "fa-folder",
+      text: "Folder",
+      icon: icons["fa-folder"],
+    });
+  }, []);
+
   const handleChange = (selectedOption) => {
     console.log("selektovani item");
     setSelectedIcon(selectedOption);
@@ -19,7 +27,6 @@ const IconsDropdow = ({ selectedIcon, setSelectedIcon }) => {
       };
     });
   };
-  console.log(createOptionsForDropdown());
 
   return (
     <div className="icons-dropdown">

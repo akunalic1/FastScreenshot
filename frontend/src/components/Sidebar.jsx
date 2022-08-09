@@ -172,6 +172,10 @@ const Sidebar = ({
     );
   };
 
+  const handleRefreshData = (e) => {
+    getAllFolders();
+  };
+
   return (
     <div className="wrapper">
       <div className="sidebar-options">{renderMenu()}</div>
@@ -185,6 +189,7 @@ const Sidebar = ({
           <FontAwesomeIcon
             className="sidebar-button"
             icon={faRefresh}
+            onClick={handleRefreshData}
           ></FontAwesomeIcon>
           <SidebarRotateButton
             isSidebarOpened={isSidebarOpened}
