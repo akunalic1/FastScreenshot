@@ -19,6 +19,7 @@ const FolderSidebarItem = ({
   const deleteFolder = async (event, folderId) => {
     await axios.delete("http://localhost:3001/folders/" + folderId);
     getAllFolders();
+    handleToggleMoreOptions();
   };
 
   const createFolder = async (event, folder) => {
