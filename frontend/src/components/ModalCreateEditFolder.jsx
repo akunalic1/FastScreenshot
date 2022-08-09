@@ -53,6 +53,7 @@ const ModalCreateEditFolder = ({
         className={classNames("shaddow", {
           hide: !openModal,
         })}
+        onClick={handleCloseModal}
       >
         <div className="modal">
           <div className="modal-wrapper">
