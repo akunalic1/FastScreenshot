@@ -88,7 +88,10 @@ const Sidebar = ({
             className={classnames("folder")}
             style={{ marginLeft: `${depth * 16}px` }}
           >
-            <div onClick={(e) => setSelectedFolder(folder)}>
+            <div
+              className="clickable-folder"
+              onClick={(e) => setSelectedFolder(folder)}
+            >
               <i className="folder-icon">{icons[folder.icon]}</i>
               <span>{folder.name}</span>
             </div>
