@@ -79,9 +79,8 @@
 .icon-wrapper:hover .tooltip,
 .icon-wrapper:hover .tooltip::before {
   opacity: 1;
-  display: block;
   transition: ease 0.3s;
-  box-shadow: inset;
+  display: block;
 }
 .tooltip:hover {
   display: none;
@@ -89,4 +88,10 @@
 
 .custom-folder-list {
   overflow-y: scroll;
+}
+
+.sidebar-top-buttons {
+  display: flex;
+  justify-content: right;
+  gap: 1rem;
 }

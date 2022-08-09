@@ -7,6 +7,7 @@ import {
   faImage,
   faFilm,
   faInfo,
+  faRefresh,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -215,7 +216,11 @@ const Sidebar = ({
           hideSidebar: !isSidebarOpened,
         })}
       >
-        <div>
+        <div className="sidebar-top-buttons">
+          <FontAwesomeIcon
+            className="sidebar-button"
+            icon={faRefresh}
+          ></FontAwesomeIcon>
           <SidebarRotateButton
             isSidebarOpened={isSidebarOpened}
             setIsSidebarOpened={setIsSidebarOpened}
