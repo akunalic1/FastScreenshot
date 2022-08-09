@@ -25,14 +25,23 @@
 }
 
 .folder-icon,
-.add-folder-icon {
+.add-folder-icon,
+.folder-icon-options {
   margin-right: 0.5rem;
+  padding: 0.2rem;
+  width: 2rem;
+  height: fit-content;
 }
 
+.folder-icon-options {
+  display: flex;
+  justify-content: center;
+}
+.folder-icon-options:hover,
 .add-folder-icon:hover {
-  background-color: aliceblue;
+  background-color: rgb(155, 150, 150);
   color: var(--dark-shadow-blue);
-  border-radius: 50%;
+  border-radius: 4px;
 }
 
 .sidebar-options,
@@ -94,4 +103,29 @@
   display: flex;
   justify-content: right;
   gap: 1rem;
+}
+
+.custom-folder-list::-webkit-scrollbar {
+  display: none;
+}
+
+.more-options-folder {
+  position: absolute;
+  padding: 0.3rem 0.5rem;
+  border-radius: 10px;
+  left: 18rem;
+  color: var(--primary);
+  z-index: 1000000;
+  background-color: var(--secondary);
+}
+
+.more-options-folder::before {
+  content: "";
+  height: 11px;
+  width: 11px;
+  position: absolute;
+  left: -0.3rem;
+  top: 0.6rem;
+  background-color: var(--secondary);
+  transform: rotate(45deg);
 }

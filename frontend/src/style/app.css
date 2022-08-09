@@ -124,3 +124,7 @@ body {
   border-radius: 20%;
   border-bottom: 1px solid var(--secondary);
 }
+
+.hide {
+  display: none;
+}

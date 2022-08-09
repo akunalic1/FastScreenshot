@@ -6,6 +6,7 @@ import {
   faFilm,
   faPlus,
   faTrash,
+  faEllipsisV,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -17,4 +18,5 @@ export default {
   "fa-film": <FontAwesomeIcon icon={faFilm} />,
   "fa-plus": <FontAwesomeIcon icon={faPlus} />,
   "fa-trash": <FontAwesomeIcon icon={faTrash} />,
+  "fa-ellipsis-v": <FontAwesomeIcon icon={faEllipsisV} />,
 };
