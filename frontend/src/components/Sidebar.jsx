@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import "./../style/sidebar.css";
 import icons from "../constants/icons";
+import SidebarRotateButton from "./SidebarRotateButton";
 
 const classnames = require("classnames");
 
@@ -209,11 +210,17 @@ const Sidebar = ({
     <div className="wrapper">
       <div className="sidebar-options">{renderMenu()}</div>
       <div
-        className={classnames("sidebar", "is-fullheight", "hero", {
+        className={classnames("sidebar", {
           showSidebar: isSidebarOpened,
           hideSidebar: !isSidebarOpened,
         })}
       >
+        <div>
+          <SidebarRotateButton
+            isSidebarOpened={isSidebarOpened}
+            setIsSidebarOpened={setIsSidebarOpened}
+          />
+        </div>
         <div className="title">{openedMenuOption}</div>
         {renderSidebar()}
       </div>

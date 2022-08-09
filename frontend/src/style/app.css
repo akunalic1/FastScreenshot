@@ -41,15 +41,19 @@ body {
   color: var(--secondary);
   background-color: var(--primary);
   padding: 0.5rem;
-  height: fit-content;
+  height: 1remt;
   transition: transform 0.25s ease;
-  border: 1px solid var(--secondary);
-  border-radius: 5px;
+  border: none;
+  border-radius: 40%;
+  cursor: pointer;
+  box-shadow: 0px 0px 4px 0px var(--secondary);
 }
 
 .rotate-sidebar-button {
   transform: rotate(90deg);
   transition: transform 0.25s ease;
+  position: absolute;
+  left: 290px;
 }
 
 .rotate-Information-button {
@@ -60,6 +64,7 @@ body {
 .fa-bars {
   height: 1rem;
   width: 1rem;
+  margin: 0;
 }
 
 .sidebar,

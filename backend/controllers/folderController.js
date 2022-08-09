@@ -29,8 +29,14 @@ const deleteFoldereWithAllSubfolders = async (req, res) => {
   res.send({ response: aaa });
 };
 
+const createFolder = async (req, res) => {
+  const folder = await Folders.create(req.body);
+  res.json(folder);
+};
+
 module.exports = {
   getAllFolders,
   getRootFolderId,
   deleteFoldereWithAllSubfolders,
+  createFolder,
 };
