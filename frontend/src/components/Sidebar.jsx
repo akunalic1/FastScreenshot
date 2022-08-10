@@ -8,6 +8,7 @@ import {
   faFilm,
   faInfo,
   faRefresh,
+  faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -67,7 +68,6 @@ const Sidebar = ({
   }, []);
 
   const renderOneFolder = (folder, depth) => {
-    console.log(folder.id);
     return (
       <div>
         <FolderSidebarItem
@@ -87,7 +87,6 @@ const Sidebar = ({
   };
 
   const renderFolders = (photoFolders, depth) => {
-    console.log("foldeir za rendanje ", photoFolders);
     return photoFolders?.map((folder) => renderOneFolder(folder, depth));
   };
 
@@ -103,6 +102,11 @@ const Sidebar = ({
         setOpenedMenuOption(option.name);
       }
     }
+  };
+
+  const handleOpenModal = () => {
+    setParentFolder(null);
+    setOpenModal(true);
   };
 
   const renderMenu = () => {
@@ -168,7 +172,14 @@ const Sidebar = ({
             0
           )}
         </ul>
-        <div className="sidebar-separator"></div>
+        <div className="separator">
+          <div className="sidebar-separator"></div>
+          <FontAwesomeIcon
+            className="sidebar-button"
+            icon={faPlus}
+            onClick={handleOpenModal}
+          ></FontAwesomeIcon>
+        </div>
         <ul className="custom-folder-list" style={{ listStyle: "none" }}>
           {renderFolders(
             openedMenuOption === "Photos"

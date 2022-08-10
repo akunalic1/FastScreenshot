@@ -3,34 +3,34 @@ import React, { useEffect } from "react";
 import icons from "../constants/icons";
 import Select from "react-select";
 
-const IconsDropdow = ({ selectedIcon, setSelectedIcon }) => {
-  useEffect(() => {
-    setSelectedIcon({
-      value: "fa-folder",
-      text: "Folder",
-      icon: icons["fa-folder"],
-    });
-  }, []);
-
+const CategoryDropdown = ({
+  folderCategory,
+  setFolderCategory,
+  openedMenuOption,
+}) => {
   const handleChange = (selectedOption) => {
-    setSelectedIcon(selectedOption);
+    setFolderCategory(selectedOption);
   };
 
   const createOptionsForDropdown = () => {
-    return Object.entries(icons).map((icon) => {
-      return {
-        value: icon[0],
-        text: icon[0].replace("fa-", ""),
-        icon: icon[1],
-      };
-    });
+    return [
+      {
+        value: "photo",
+        text: "Photo",
+        icon: null,
+      },
+      {
+        value: "video",
+        text: "Video",
+        icon: null,
+      },
+    ];
   };
-
   return (
     <div className="icons-dropdown">
       <Select
-        placeholder="Select Option"
-        value={selectedIcon}
+        placeholder="Select folder category"
+        value={folderCategory}
         getOptionLabel={(e) => (
           <div style={{ display: "flex", alignItems: "center" }}>
             {e.icon}
@@ -45,4 +45,4 @@ const IconsDropdow = ({ selectedIcon, setSelectedIcon }) => {
   );
 };
 
-export default IconsDropdow;
+export default CategoryDropdown;

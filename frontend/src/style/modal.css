@@ -10,10 +10,12 @@
 }
 
 .modal {
-  margin: 40%;
+  margin: auto;
+  margin-top: 20%;
   padding: 1.5rem;
   background-color: var(--primary);
   width: fit-content;
+  z-index: 200;
 }
 
 .modal form {
@@ -43,4 +45,12 @@
   position: absolute;
   right: -2rem;
   top: -2rem;
+}
+
+.error {
+  border: 2px solid red;
+}
+
+.success {
+  border: 2px solid green;
 }

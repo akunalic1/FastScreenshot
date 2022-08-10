@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, createRef } from "react";
 import IconsDropdow from "./IconsDropdow";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
@@ -6,23 +6,55 @@ import classNames from "classnames";
 import axios from "axios";
 import "../style/modal.css";
 import "../style/app.css";
+import CategoryDropdown from "./CategoryDropdown";
 
 const ModalCreateEditFolder = ({
   parentFolder,
   openModal,
   setOpenModal,
   setFolders,
+  openedMenuOption,
 }) => {
   const [folderName, setfolderName] = useState("");
   const [selectedIcon, setSelectedIcon] = useState("fa-folder");
+  const [folderCategory, setFolderCategory] = useState({
+    value: "photo",
+    text: "Photo",
+    icon: null,
+  });
+
+  const folderNameInputRef = createRef();
+
+  useEffect(() => {
+    clearValidationBorder();
+  }, []);
+
+  useEffect(() => {
+    openedMenuOption && ["Folders", "Photos", "Tags"].includes(openedMenuOption)
+      ? setFolderCategory({
+          value: "photo",
+          text: "Photo",
+          icon: null,
+        })
+      : setFolderCategory({
+          value: "video",
+          text: "Video",
+          icon: null,
+        });
+  }, [openedMenuOption]);
+
+  const clearValidationBorder = () => {
+    folderNameInputRef?.current?.classList.remove("success");
+    folderNameInputRef?.current?.classList.remove("error");
+  };
 
   const addFolderToDb = async () => {
     axios.post("http://localhost:3001/folders", {
       name: folderName,
       icon: selectedIcon?.value,
       type: "custom",
-      parentFolder: parentFolder?.id,
-      category: parentFolder?.category,
+      parentFolder: parentFolder?.id || null,
+      category: parentFolder?.category || folderCategory.value,
     });
   };
 
@@ -32,28 +64,40 @@ const ModalCreateEditFolder = ({
   };
 
   const handleChangeFolderName = (e) => {
+    if (e.target.value.length > 2) {
+      folderNameInputRef.current.classList.remove("error");
+      folderNameInputRef.current.classList.add("success");
+    } else {
+      folderNameInputRef.current.classList.remove("success");
+      folderNameInputRef.current.classList.add("error");
+    }
     setfolderName(e.target.value);
   };
 
   const handleSumbit = async (e) => {
     e.preventDefault();
-    await addFolderToDb();
-    setOpenModal(false);
-    setfolderName("");
-    await getAllFolders();
+    if (
+      !folderNameInputRef.current.classList.value.includes("error") &&
+      folderNameInputRef.current.value.length !== 0
+    ) {
+      await addFolderToDb();
+      setOpenModal(false);
+      setfolderName("");
+      await getAllFolders();
+    }
   };
 
   const handleCloseModal = (e) => {
     setOpenModal(false);
+    clearValidationBorder();
   };
 
   return (
     <div>
       <div
         className={classNames("shaddow", {
-          hide: !openModal,
+          //  hide: !openModal,
         })}
-        onClick={handleCloseModal}
       >
         <div className="modal">
           <div className="modal-wrapper">
@@ -68,7 +112,15 @@ const ModalCreateEditFolder = ({
                 value={folderName}
                 onChange={handleChangeFolderName}
                 placeholder="Folder name"
+                ref={folderNameInputRef}
               ></input>
+              {openedMenuOption === "Folders" && (
+                <CategoryDropdown
+                  folderCategory={folderCategory}
+                  setFolderCategory={setFolderCategory}
+                  openedMenuOption={openedMenuOption}
+                ></CategoryDropdown>
+              )}
               <IconsDropdow
                 selectedIcon={selectedIcon}
                 setSelectedIcon={setSelectedIcon}

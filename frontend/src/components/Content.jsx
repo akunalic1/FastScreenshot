@@ -12,7 +12,6 @@ const Content = ({ selectedFolder, setClickedItem, allFolderId }) => {
   useEffect(() => {
     const getAllImages = async () => {
       const resp = await axios.get("http://localhost:3001/images/all");
-      console.log("renda se respons iz axiosa", resp.data);
       setAllImages(resp.data);
     };
     getAllImages();
@@ -29,7 +28,6 @@ const Content = ({ selectedFolder, setClickedItem, allFolderId }) => {
   }, [selectedFolder]);
 
   const renderOneImage = (image) => {
-    console.log("render one  item ", image);
     return (
       <img
         onClick={(e) => setClickedItem(image)}
@@ -41,7 +39,6 @@ const Content = ({ selectedFolder, setClickedItem, allFolderId }) => {
   };
 
   const renderOneVideo = (video) => {
-    console.log("render one  item ", video);
     return (
       <video
         controls

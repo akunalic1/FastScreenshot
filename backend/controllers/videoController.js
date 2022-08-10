@@ -1,7 +1,6 @@
 const { Videos } = require("../models");
 
 const uploadSingleVideo = async (req, res) => {
-  console.log(req.file);
   const data = {
     ...req.body,
     name: req.file?.originalname,

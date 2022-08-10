@@ -5,8 +5,6 @@ import "./../style/details.css";
 const classnames = require("classnames");
 
 const Details = ({ areDetailsOpened, item }) => {
-  console.log(item);
-
   const showDetails = (item) => {
     return (
       <div className="item-details">
@@ -23,7 +21,8 @@ const Details = ({ areDetailsOpened, item }) => {
         className={classnames("information is-fullheight hero", {
           showInfo: areDetailsOpened,
           hideInfo: !areDetailsOpened,
-        })}>
+        })}
+      >
         {item && showDetails(item)}
       </div>
     </div>

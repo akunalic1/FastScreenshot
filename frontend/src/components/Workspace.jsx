@@ -60,14 +60,17 @@ const Workspace = ({
         allFolderId={allFolderId}
       />
       <Details areDetailsOpened={areDetailsOpened} item={clickedItem}></Details>
-      <ModalCreateEditFolder
-        openModal={openModal}
-        setOpenModal={setOpenModal}
-        createOrEditModal={createOrEditModal}
-        setCreateOrEditModal={setCreateOrEditModal}
-        parentFolder={parentFolder}
-        setFolders={setFolders}
-      ></ModalCreateEditFolder>
+      {openModal && (
+        <ModalCreateEditFolder
+          openModal={openModal}
+          setOpenModal={setOpenModal}
+          createOrEditModal={createOrEditModal}
+          setCreateOrEditModal={setCreateOrEditModal}
+          parentFolder={parentFolder}
+          setFolders={setFolders}
+          openedMenuOption={openedMenuOption}
+        ></ModalCreateEditFolder>
+      )}
     </div>
   );
 };
