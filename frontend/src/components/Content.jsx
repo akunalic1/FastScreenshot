@@ -30,6 +30,7 @@ const Content = ({ selectedFolder, setClickedItem, allFolderId }) => {
   const renderOneImage = (image) => {
     return (
       <img
+        draggable
         onClick={(e) => setClickedItem(image)}
         className="image-content"
         key={image.id}

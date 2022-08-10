@@ -33,6 +33,10 @@ const FolderSidebarItem = ({
     setOpenMoreOptions(!openMoreOptions);
   };
 
+  const handleDropFile = (e) => {
+    console.log("dropano je ", e);
+  };
+
   return (
     <li
       key={folder.id}
@@ -50,6 +54,14 @@ const FolderSidebarItem = ({
         >
           <i className="folder-icon">{icons[folder.icon]}</i>
           <span>{folder.name}</span>
+          <input
+            autoComplete="off"
+            onClick={null}
+            style={{ marginLeft: `${depth * 16}px` }}
+            type="img"
+            id="fileElem"
+            onDrop={handleDropFile}
+          ></input>
         </div>
         <p>{folder.amount}</p>
         {folder.type !== "default" && (
