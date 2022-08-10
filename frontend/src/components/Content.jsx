@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../api/axios";
 
 import "./../style/workspace.css";
 
@@ -11,7 +11,7 @@ const Content = ({ selectedFolder, setClickedItem, allFolderId }) => {
 
   useEffect(() => {
     const getAllImages = async () => {
-      const resp = await axios.get("http://localhost:3001/images/all");
+      const resp = await axios.get("/images/all");
       setAllImages(resp.data);
     };
     getAllImages();

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axios from "../api/axios";
 
 import {
   faWrench,
@@ -59,7 +59,7 @@ const Sidebar = ({
   setFolders,
 }) => {
   const getAllFolders = async () => {
-    const resp = await axios.get("http://localhost:3001/folders/all");
+    const resp = await axios.get("/folders/all");
     setFolders(resp.data);
   };
 

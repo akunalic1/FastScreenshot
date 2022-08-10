@@ -3,7 +3,7 @@ import IconsDropdow from "./IconsDropdow";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import classNames from "classnames";
-import axios from "axios";
+import axios from "../api/axios";
 import "../style/modal.css";
 import "../style/app.css";
 import CategoryDropdown from "./CategoryDropdown";
@@ -49,7 +49,7 @@ const ModalCreateEditFolder = ({
   };
 
   const addFolderToDb = async () => {
-    axios.post("http://localhost:3001/folders", {
+    axios.post("/folders", {
       name: folderName,
       icon: selectedIcon?.value,
       type: "custom",
@@ -59,7 +59,7 @@ const ModalCreateEditFolder = ({
   };
 
   const getAllFolders = async () => {
-    const resp = await axios.get("http://localhost:3001/folders/all");
+    const resp = await axios.get("/folders/all");
     setFolders(resp.data);
   };
 

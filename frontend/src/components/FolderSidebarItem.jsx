@@ -1,5 +1,5 @@
 import icons from "../constants/icons";
-import axios from "axios";
+import axios from "../api/axios";
 import React, { useState } from "react";
 const classnames = require("classnames");
 
@@ -17,13 +17,13 @@ const FolderSidebarItem = ({
   const [openMoreOptions, setOpenMoreOptions] = useState(false);
 
   const deleteFolder = async (event, folderId) => {
-    await axios.delete("http://localhost:3001/folders/" + folderId);
+    await axios.delete("/folders/" + folderId);
     getAllFolders();
     handleToggleMoreOptions();
   };
 
   const changeImageDestination = async (imageUrl, destinationFolderId) => {
-    await axios.patch("http://localhost:3001/images/", {
+    await axios.patch("/images/", {
       destinationFolderId,
       imageUrl,
     });

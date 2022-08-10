@@ -4,7 +4,7 @@ import Sidebar from "./Sidebar.jsx";
 import Content from "./Content.jsx";
 import Details from "./Details.jsx";
 import { useNavigate } from "react-router";
-import axios from "axios";
+import axios from "../api/axios";
 import ModalCreateEditFolder from "./ModalCreateEditFolder.jsx";
 
 const Workspace = ({
@@ -25,7 +25,7 @@ const Workspace = ({
 
   useEffect(() => {
     const getRootFolder = async () => {
-      const resp = await axios.get("http://localhost:3001/folders/root");
+      const resp = await axios.get("/folders/root");
       setSelectedFolder(resp.data);
       setAllFolderId(resp.data.id);
     };
