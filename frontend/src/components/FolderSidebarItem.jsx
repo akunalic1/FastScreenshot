@@ -22,6 +22,13 @@ const FolderSidebarItem = ({
     handleToggleMoreOptions();
   };
 
+  const changeImageDestination = async (imageUrl, destinationFolderId) => {
+    await axios.patch("http://localhost:3001/images/", {
+      destinationFolderId,
+      imageUrl,
+    });
+  };
+
   const createFolder = async (event, folder) => {
     setOpenModal(!openModal);
     setCreateOrEditModal("create");
@@ -33,8 +40,18 @@ const FolderSidebarItem = ({
     setOpenMoreOptions(!openMoreOptions);
   };
 
-  const handleDropFile = (e) => {
-    console.log("dropano je ", e);
+  const clearUrl = (imageUrl) => {
+    const unusedPart = imageUrl.slice(
+      imageUrl.indexOf("."),
+      imageUrl.lastIndexOf(".")
+    );
+    return "/" + imageUrl.replace(unusedPart, "");
+  };
+
+  const handleDropFile = (e, destinationFolder) => {
+    const urlParts = e.dataTransfer.getData("text").split("/");
+    const imageUrl = clearUrl(urlParts[urlParts.length - 1]);
+    changeImageDestination(imageUrl, destinationFolder.id);
   };
 
   return (
@@ -56,11 +73,10 @@ const FolderSidebarItem = ({
           <span>{folder.name}</span>
           <input
             autoComplete="off"
-            onClick={null}
             style={{ marginLeft: `${depth * 16}px` }}
             type="img"
             id="fileElem"
-            onDrop={handleDropFile}
+            onDrop={(e) => handleDropFile(e, folder)}
           ></input>
         </div>
         <p>{folder.amount}</p>
