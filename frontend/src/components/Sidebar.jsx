@@ -1,48 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "../api/axios";
-
-import {
-  faWrench,
-  faFolder,
-  faImage,
-  faFilm,
-  faInfo,
-  faRefresh,
-  faPlus,
-} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import { faRefresh, faPlus } from "@fortawesome/free-solid-svg-icons";
 import "./../style/sidebar.css";
 import SidebarRotateButton from "./SidebarRotateButton";
 import FolderSidebarItem from "./FolderSidebarItem";
+import Menu from "./Menu";
+import SidebarFolderList from "./SidebarFolderList";
 
 const classnames = require("classnames");
-
-const upperMenuOptions = [
-  {
-    name: "Folders",
-    icon: faFolder,
-  },
-  {
-    name: "Photos",
-    icon: faImage,
-  },
-  {
-    name: "Videos",
-    icon: faFilm,
-  },
-];
-
-const lowerMenuOptions = [
-  {
-    name: "Info",
-    icon: faInfo,
-  },
-  {
-    name: "Settings",
-    icon: faWrench,
-  },
-];
 
 const Sidebar = ({
   isSidebarOpened,
@@ -90,56 +56,9 @@ const Sidebar = ({
     return photoFolders?.map((folder) => renderOneFolder(folder, depth));
   };
 
-  const menuIconHandler = (e, option) => {
-    if (["Info", "Settings"].includes(option.name)) {
-      setIsSidebarOpened(false);
-      setOpenedMenuOption(option.name);
-    } else {
-      if (openedMenuOption === option.name) {
-        setIsSidebarOpened(!isSidebarOpened);
-      } else {
-        setIsSidebarOpened(true);
-        setOpenedMenuOption(option.name);
-      }
-    }
-  };
-
   const handleOpenModal = () => {
     setParentFolder(null);
     setOpenModal(true);
-  };
-
-  const renderMenu = () => {
-    return (
-      <>
-        <div className="upper">
-          {upperMenuOptions.map((option) => (
-            <div className="icon-wrapper">
-              <span className="tooltip">{option.name}</span>
-              <FontAwesomeIcon
-                values={option.name}
-                onClick={(e) => menuIconHandler(e, option)}
-                className="menu-icon"
-                icon={option.icon}
-              />
-            </div>
-          ))}
-        </div>
-        <div className="lower">
-          {lowerMenuOptions.map((option) => (
-            <div className="icon-wrapper">
-              <span className="tooltip">{option.name}</span>
-              <FontAwesomeIcon
-                values={option.name}
-                onClick={(e) => menuIconHandler(e, option)}
-                className="menu-icon"
-                icon={option.icon}
-              />
-            </div>
-          ))}
-        </div>
-      </>
-    );
   };
 
   const renderSidebar = () => {
@@ -200,7 +119,14 @@ const Sidebar = ({
 
   return (
     <div className="wrapper">
-      <div className="sidebar-options">{renderMenu()}</div>
+      <div className="sidebar-options">
+        <Menu
+          setIsSidebarOpened={setIsSidebarOpened}
+          setOpenedMenuOption={setOpenedMenuOption}
+          openedMenuOption={openedMenuOption}
+          isSidebarOpened={isSidebarOpened}
+        ></Menu>
+      </div>
       <div
         className={classnames("sidebar", {
           showSidebar: isSidebarOpened,
@@ -219,7 +145,19 @@ const Sidebar = ({
           />
         </div>
         <div className="title">{openedMenuOption}</div>
-        {renderSidebar()}
+        <SidebarFolderList
+          openedMenuOption={openedMenuOption}
+          setSelectedFolder={setSelectedFolder}
+          openModal={openModal}
+          setOpenModal={setOpenModal}
+          createOrEditModal={createOrEditModal}
+          setCreateOrEditModal={setCreateOrEditModal}
+          setParentFolder={setParentFolder}
+          folders={folders}
+          setFolders={setFolders}
+          getAllFolders={getAllFolders}
+          handleOpenModal={handleOpenModal}
+        ></SidebarFolderList>
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ const {
   uploadSingleImage,
   getAllImages,
   changeImageDestination,
+  getImageNumberForFolder,
 } = require("../controllers/imageController");
 
 router
@@ -13,5 +14,7 @@ router
   .patch(changeImageDestination);
 
 router.route("/all").get(getAllImages);
+
+router.route("/:folderId").get(getImageNumberForFolder);
 
 module.exports = router;

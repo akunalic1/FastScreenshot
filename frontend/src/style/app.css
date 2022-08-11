@@ -23,7 +23,7 @@ body {
   --dark-shadow-blue: #232323;
   --green-bg: #209e55;
   --light-green: #34e1d5;
-  --blue: #3e7cc6;
+  --blue: #00879b;
 
   --sidebar-offset: 200px;
 }
@@ -39,15 +39,14 @@ body {
 
 .sidebar-button {
   color: var(--secondary);
-  background-color: var(--primary);
+  background-color: var(--blue);
   padding: 0.5rem;
   height: 1rem;
   width: 1rem;
   transition: transform 0.25s ease;
   border: none;
-  border-radius: 40%;
+  border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0px 0px 4px 0px var(--secondary);
 }
 
 .rotate-sidebar-button {
@@ -116,7 +115,7 @@ body {
   color: var(--secondary);
 }
 .menu-icon:hover {
-  background-color: #232323;
+  background-color: var(--blue);
 }
 
 .sidebar-separator {
@@ -144,4 +143,12 @@ body {
   opacity: 0;
   width: 8rem;
   cursor: pointer;
+}
+
+.image-count {
+  margin-left: 1rem;
+}
+
+.clicked-menu-option {
+  background-color: #00879b;
 }

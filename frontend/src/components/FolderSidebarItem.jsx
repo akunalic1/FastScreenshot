@@ -1,6 +1,6 @@
 import icons from "../constants/icons";
 import axios from "../api/axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 const classnames = require("classnames");
 
 const FolderSidebarItem = ({
@@ -15,6 +15,11 @@ const FolderSidebarItem = ({
   setParentFolder,
 }) => {
   const [openMoreOptions, setOpenMoreOptions] = useState(false);
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    getNumOfImages(folder.id);
+  }, []);
 
   const deleteFolder = async (event, folderId) => {
     await axios.delete("/folders/" + folderId);
@@ -27,6 +32,12 @@ const FolderSidebarItem = ({
       destinationFolderId,
       imageUrl,
     });
+  };
+
+  const getNumOfImages = async (id) => {
+    const resp = await axios.get("/images/" + id);
+
+    setCount(resp.data.count);
   };
 
   const createFolder = async (event, folder) => {
@@ -71,6 +82,7 @@ const FolderSidebarItem = ({
         >
           <i className="folder-icon">{icons[folder.icon]}</i>
           <span>{folder.name}</span>
+          <span className="image-count">{count}</span>
           <input
             autoComplete="off"
             style={{ marginLeft: `${depth * 16}px` }}

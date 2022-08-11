@@ -30,8 +30,19 @@ const changeImageDestination = async (req, res) => {
   );
   res.json(image);
 };
+
+const getImageNumberForFolder = async (req, res) => {
+  const count = await Images.count({
+    where: {
+      folder: req.params.folderId,
+    },
+  });
+  res.json({ count });
+};
+
 module.exports = {
   uploadSingleImage,
   getAllImages,
   changeImageDestination,
+  getImageNumberForFolder,
 };
