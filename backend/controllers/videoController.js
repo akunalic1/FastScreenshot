@@ -17,7 +17,17 @@ const getAllVideos = async (req, res) => {
   res.send(allVideos);
 };
 
+const getVideoNumberForFolder = async (req, res) => {
+  const count = await Videos.count({
+    where: {
+      folder: req.params.folderId,
+    },
+  });
+  res.json({ count });
+};
+
 module.exports = {
   uploadSingleVideo,
   getAllVideos,
+  getVideoNumberForFolder,
 };

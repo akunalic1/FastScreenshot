@@ -1,6 +1,7 @@
 .content {
   background-color: var(--primary);
   width: 100%;
+  padding: 1rem;
 }
 
 .image-content {
@@ -19,4 +20,8 @@
 .item-details {
   display: flex;
   flex-direction: column;
+}
+
+.video-content {
+  max-width: 15rem;
 }

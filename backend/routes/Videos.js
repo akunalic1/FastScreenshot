@@ -4,9 +4,11 @@ const videoUploader = require("../multer/multerVideos");
 const {
   uploadSingleVideo,
   getAllVideos,
+  getVideoNumberForFolder,
 } = require("../controllers/videoController");
 
 router.route("/").post(videoUploader.single("video"), uploadSingleVideo);
 router.route("/all").get(getAllVideos);
+router.route("/:folderId").get(getVideoNumberForFolder);
 
 module.exports = router;

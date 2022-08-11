@@ -18,7 +18,7 @@ const FolderSidebarItem = ({
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    getNumOfImages(folder.id);
+    getNumOfItems(folder);
   }, []);
 
   const deleteFolder = async (event, folderId) => {
@@ -34,8 +34,10 @@ const FolderSidebarItem = ({
     });
   };
 
-  const getNumOfImages = async (id) => {
-    const resp = await axios.get("/images/" + id);
+  const getNumOfItems = async (folder) => {
+    const resp = await axios.get(
+      `/${folder.category === "photo" ? "images" : "videos"}/${folder.id}`
+    );
 
     setCount(resp.data.count);
   };
