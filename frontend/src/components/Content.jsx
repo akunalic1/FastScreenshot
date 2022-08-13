@@ -12,6 +12,8 @@ const Content = ({
   setClickedItem,
   allFolderId,
   openedMenuOption,
+  areDetailsOpened,
+  setAreDetailsOpened,
 }) => {
   const [items, setItems] = useState([]);
   const [allImages, setAllImages] = useState([]);
@@ -58,9 +60,19 @@ const Content = ({
     <div className={classnames("content")}>
       {items.map((item) =>
         item.type.includes("image") ? (
-          <Image image={item} setClickedItem={setClickedItem}></Image>
+          <Image
+            image={item}
+            setClickedItem={setClickedItem}
+            areDetailsOpened={areDetailsOpened}
+            setAreDetailsOpened={setAreDetailsOpened}
+          ></Image>
         ) : (
-          <Video video={item} setClickedItem={setClickedItem}></Video>
+          <Video
+            video={item}
+            setClickedItem={setClickedItem}
+            areDetailsOpened={areDetailsOpened}
+            setAreDetailsOpened={setAreDetailsOpened}
+          ></Video>
         )
       )}
     </div>

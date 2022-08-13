@@ -12,6 +12,7 @@ const Workspace = ({
   isSidebarOpened,
   setIsSidebarOpened,
   areDetailsOpened,
+  setAreDetailsOpened,
 }) => {
   const navigate = useNavigate();
   const [openedMenuOption, setOpenedMenuOption] = useState("Folders");
@@ -58,8 +59,14 @@ const Workspace = ({
         setOpenedMenuOption={setOpenedMenuOption}
         selectedFolder={selectedFolder}
         allFolderId={allFolderId}
+        areDetailsOpened={areDetailsOpened}
+        setAreDetailsOpened={setAreDetailsOpened}
       />
-      <Details areDetailsOpened={areDetailsOpened} item={clickedItem}></Details>
+      <Details
+        areDetailsOpened={areDetailsOpened}
+        item={clickedItem}
+        setAreDetailsOpened={setAreDetailsOpened}
+      ></Details>
       {openModal && (
         <ModalCreateEditFolder
           openModal={openModal}

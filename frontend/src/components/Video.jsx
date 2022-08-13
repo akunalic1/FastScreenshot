@@ -1,12 +1,21 @@
 import React from "react";
 
-const Video = ({ setClickedItem, video }) => {
+const Video = ({
+  setClickedItem,
+  video,
+  areDetailsOpened,
+  setAreDetailsOpened,
+}) => {
+  const handleOnVideoClick = (e) => {
+    setAreDetailsOpened(!areDetailsOpened);
+    setClickedItem(video);
+  };
   return (
     <video
       controls
       autoplay
       draggable
-      onClick={(e) => setClickedItem(video)}
+      onClick={handleOnVideoClick}
       className="video-content"
       key={video.id}
       src={require("../../../backend/public/videos" + video.url)}

@@ -20,8 +20,24 @@
 .item-details {
   display: flex;
   flex-direction: column;
+  gap: 1rem;
+}
+
+.item-details > h4 {
+  text-align: center;
 }
 
 .video-content {
   max-width: 15rem;
+}
+
+.item-info-s {
+  font-size: smaller;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+}
+
+.item-info-s .data {
+  font-size: medium;
 }

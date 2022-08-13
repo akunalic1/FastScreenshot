@@ -22,6 +22,7 @@ const App = () => {
             isSidebarOpened={isSidebarOpened}
             setIsSidebarOpened={setIsSidebarOpened}
             areDetailsOpened={areDetailsOpened}
+            setAreDetailsOpened={setAreDetailsOpened}
           />
         }
       ></Route>

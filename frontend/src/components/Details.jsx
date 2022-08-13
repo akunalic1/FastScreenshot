@@ -1,20 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import "./../style/details.css";
 
 const classnames = require("classnames");
 
-const Details = ({ areDetailsOpened, item }) => {
-  const showDetails = (item) => {
-    return (
-      <div className="item-details">
-        <img className="item-image" src={item.url}></img>
-        <h4>{item.name}</h4>
-        <p>{item.date.toString()}</p>
-        <p>{item.type}</p>
-      </div>
-    );
-  };
+const Details = ({ areDetailsOpened, item, setAreDetailsOpened }) => {
+  console.log("clicked item", item);
+  console.log("areDetailsOpened", areDetailsOpened);
+
+  useEffect(() => {
+    setAreDetailsOpened(true);
+  }, [item]);
+
   return (
     <div className="wrapper">
       <div
@@ -23,7 +20,38 @@ const Details = ({ areDetailsOpened, item }) => {
           hideInfo: !areDetailsOpened,
         })}
       >
-        {item && showDetails(item)}
+        {item && (
+          <div className="item-details">
+            {item.type.includes("image") ? (
+              <img
+                className="item-image"
+                src={require(`../../../backend/public/images` + item.url)}
+              ></img>
+            ) : (
+              <video
+                className="item-image"
+                src={require(`../../../backend/public/videos` + item.url)}
+              ></video>
+            )}
+            <h4>{item.name}</h4>
+            <span className="item-info-s">
+              <p>Created at:</p>
+              <p className="data">{new Date(item.createdAt).toUTCString()}</p>
+            </span>
+            <span className="item-info-s">
+              <p>Last updated at:</p>
+              <p className="data">{new Date(item.updatedAt).toUTCString()}</p>
+            </span>
+            <span className="item-info-s">
+              <p>Type:</p>
+              <p className="data">{item.type.split("/")[1]}</p>
+            </span>
+            <span className="item-info-s">
+              <p>Size:</p>
+              <p className="data">{item.size * 0.000001}MB</p>
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );
