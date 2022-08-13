@@ -27,11 +27,16 @@ const FolderSidebarItem = ({
     handleToggleMoreOptions();
   };
 
-  const changeImageDestination = async (imageUrl, destinationFolderId) => {
-    await axios.patch("/images/", {
-      destinationFolderId,
-      imageUrl,
-    });
+  const changeFileDestination = async (fileUrl, destinationFolderId) => {
+    folder.category === "photo"
+      ? await axios.patch("/images/", {
+          destinationFolderId,
+          imageUrl: fileUrl,
+        })
+      : await axios.patch("/videos/", {
+          destinationFolderId,
+          videoUrl: fileUrl,
+        });
   };
 
   const getNumOfItems = async (folder) => {
@@ -53,18 +58,18 @@ const FolderSidebarItem = ({
     setOpenMoreOptions(!openMoreOptions);
   };
 
-  const clearUrl = (imageUrl) => {
-    const unusedPart = imageUrl.slice(
-      imageUrl.indexOf("."),
-      imageUrl.lastIndexOf(".")
+  const clearUrl = (fileUrl) => {
+    const unusedPart = fileUrl.slice(
+      fileUrl.indexOf("."),
+      fileUrl.lastIndexOf(".")
     );
-    return "/" + imageUrl.replace(unusedPart, "");
+    return "/" + fileUrl.replace(unusedPart, "");
   };
 
   const handleDropFile = (e, destinationFolder) => {
     const urlParts = e.dataTransfer.getData("text").split("/");
-    const imageUrl = clearUrl(urlParts[urlParts.length - 1]);
-    changeImageDestination(imageUrl, destinationFolder.id);
+    const fileUrl = clearUrl(urlParts[urlParts.length - 1]);
+    changeFileDestination(fileUrl, destinationFolder.id);
   };
 
   return (
@@ -88,7 +93,7 @@ const FolderSidebarItem = ({
           <input
             autoComplete="off"
             style={{ marginLeft: `${depth * 16}px` }}
-            type="img"
+            type={folder.category === "photo" ? "image/*" : "video/*"}
             id="fileElem"
             onDrop={(e) => handleDropFile(e, folder)}
           ></input>

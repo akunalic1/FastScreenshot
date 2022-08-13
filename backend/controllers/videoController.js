@@ -26,8 +26,23 @@ const getVideoNumberForFolder = async (req, res) => {
   res.json({ count });
 };
 
+const changeVideoDestination = async (req, res) => {
+  const video = await Videos.update(
+    {
+      folder: req.body.destinationFolderId,
+    },
+    {
+      where: {
+        url: req.body.videoUrl,
+      },
+    }
+  );
+  res.json(video);
+};
+
 module.exports = {
   uploadSingleVideo,
   getAllVideos,
   getVideoNumberForFolder,
+  changeVideoDestination,
 };

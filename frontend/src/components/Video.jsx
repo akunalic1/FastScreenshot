@@ -5,6 +5,7 @@ const Video = ({ setClickedItem, video }) => {
     <video
       controls
       autoplay
+      draggable
       onClick={(e) => setClickedItem(video)}
       className="video-content"
       key={video.id}

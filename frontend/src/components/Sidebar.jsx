@@ -61,58 +61,6 @@ const Sidebar = ({
     setOpenModal(true);
   };
 
-  const renderSidebar = () => {
-    const defaultPhotoFolders =
-      folders?.filter(
-        (folder) => folder.type === "default" && folder.category === "photo"
-      ) || [];
-    const customPhotoFolders =
-      folders?.filter(
-        (folder) => folder.type !== "default" && folder.category === "photo"
-      ) || [];
-    const defaultVideoFolders =
-      folders?.filter(
-        (folder) => folder.type === "default" && folder.category === "video"
-      ) || [];
-    const customVideoFolders =
-      folders?.filter(
-        (folder) => folder.type !== "default" && folder.category === "video"
-      ) || [];
-
-    return (
-      <>
-        <ul style={{ listStyle: "none" }}>
-          {renderFolders(
-            openedMenuOption === "Photos"
-              ? defaultPhotoFolders
-              : openedMenuOption === "Videos"
-              ? defaultVideoFolders
-              : [...defaultPhotoFolders, ...defaultVideoFolders],
-            0
-          )}
-        </ul>
-        <div className="separator">
-          <div className="sidebar-separator"></div>
-          <FontAwesomeIcon
-            className="sidebar-button"
-            icon={faPlus}
-            onClick={handleOpenModal}
-          ></FontAwesomeIcon>
-        </div>
-        <ul className="custom-folder-list" style={{ listStyle: "none" }}>
-          {renderFolders(
-            openedMenuOption === "Photos"
-              ? customPhotoFolders
-              : openedMenuOption === "Videos"
-              ? customVideoFolders
-              : [...customPhotoFolders, ...customVideoFolders],
-            0
-          )}
-        </ul>
-      </>
-    );
-  };
-
   const handleRefreshData = (e) => {
     getAllFolders();
   };

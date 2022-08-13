@@ -5,9 +5,13 @@ const {
   uploadSingleVideo,
   getAllVideos,
   getVideoNumberForFolder,
+  changeVideoDestination,
 } = require("../controllers/videoController");
 
-router.route("/").post(videoUploader.single("video"), uploadSingleVideo);
+router
+  .route("/")
+  .post(videoUploader.single("video"), uploadSingleVideo)
+  .patch(changeVideoDestination);
 router.route("/all").get(getAllVideos);
 router.route("/:folderId").get(getVideoNumberForFolder);
 
