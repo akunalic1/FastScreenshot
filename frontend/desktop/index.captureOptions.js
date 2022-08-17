@@ -1,14 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import Buttons from "./Buttons.jsx";
+import CaptureOptions from "./components/CaptureOptions.jsx";
 
-const root = ReactDOM.createRoot(document.getElementById("root2"));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Buttons />
+      <CaptureOptions></CaptureOptions>
     </BrowserRouter>
   </React.StrictMode>
 );
-

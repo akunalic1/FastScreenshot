@@ -10,11 +10,12 @@ class TrayMainWindow extends BrowserWindow {
       frame: false,
       resizable: false,
       webPreferences: {
-        preload: path.join(__dirname, "preload.js"),
+        preload: path.join(__dirname, "../electron/preload.js"),
+        nodeIntegration: true,
       },
     });
-
     this.loadURL(url);
+
     this.on("blur", this.onBlur.bind(this));
   }
 
@@ -24,4 +25,3 @@ class TrayMainWindow extends BrowserWindow {
 }
 
 module.exports = TrayMainWindow;
-
