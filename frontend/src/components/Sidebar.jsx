@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
-import axios from "../api/axios";
+import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRefresh, faPlus } from "@fortawesome/free-solid-svg-icons";
-import "./../style/sidebar.css";
-import SidebarRotateButton from "./SidebarRotateButton";
-import FolderSidebarItem from "./FolderSidebarItem";
+import { faRefresh } from "@fortawesome/free-solid-svg-icons";
+
 import Menu from "./Menu";
 import SidebarFolderList from "./SidebarFolderList";
+import SidebarRotateButton from "./SidebarRotateButton";
+import FolderSidebarItem from "./FolderSidebarItem";
+
+import { getAllFolders } from "../utils/folderUtils";
+import "./../style/sidebar.css";
 
 const classnames = require("classnames");
 
@@ -24,13 +26,8 @@ const Sidebar = ({
   folders,
   setFolders,
 }) => {
-  const getAllFolders = async () => {
-    const resp = await axios.get("/folders/all");
-    setFolders(resp.data);
-  };
-
   useEffect(() => {
-    getAllFolders();
+    getAllFolders(setFolders);
   }, []);
 
   const renderOneFolder = (folder, depth) => {

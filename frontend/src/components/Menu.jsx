@@ -5,8 +5,6 @@ import {
   faImage,
   faFilm,
   faInfo,
-  faRefresh,
-  faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
@@ -59,10 +57,6 @@ const Menu = ({
       element.classList.remove("clicked-menu-option");
     });
     e.target.closest(".menu-icon").classList.add("clicked-menu-option");
-  };
-
-  const handleChangeSelectedIcon = (e) => {
-    console.log("ggggggg");
   };
 
   return (

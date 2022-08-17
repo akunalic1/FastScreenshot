@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
-
+import React, { useEffect } from "react";
 import "./../style/details.css";
-
 const classnames = require("classnames");
 
 const Details = ({ areDetailsOpened, item, setAreDetailsOpened }) => {

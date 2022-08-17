@@ -1,6 +1,4 @@
-import { icon } from "@fortawesome/fontawesome-svg-core";
-import React, { useEffect } from "react";
-import icons from "../constants/icons";
+import React from "react";
 import Select from "react-select";
 
 const CategoryDropdown = ({

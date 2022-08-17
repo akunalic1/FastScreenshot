@@ -13,7 +13,7 @@ const Video = ({
   return (
     <video
       controls
-      autoplay
+      autoPlay
       draggable
       onClick={handleOnVideoClick}
       className="video-content"

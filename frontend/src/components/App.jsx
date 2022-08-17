@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { Route, Routes } from "react-router";
 
-import "./../style/app.css";
 import LogIn from "./LogIn.jsx";
-import TopBar from "./Topbar";
 import Workspace from "./Workspace.jsx";
 
+import "./../style/app.css";
+
 const isLoggedIn = true;
-const IS_ELECTRON = true;
 
 const App = () => {
   const [isSidebarOpened, setIsSidebarOpened] = useState(true);

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
+import axios from "../api/axios";
 
 import Sidebar from "./Sidebar.jsx";
 import Content from "./Content.jsx";
 import Details from "./Details.jsx";
-import { useNavigate } from "react-router";
-import axios from "../api/axios";
 import ModalCreateEditFolder from "./ModalCreateEditFolder.jsx";
 
 const Workspace = ({

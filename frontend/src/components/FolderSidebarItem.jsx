@@ -10,7 +10,6 @@ const FolderSidebarItem = ({
   getAllFolders,
   openModal,
   setOpenModal,
-  createOrEditModal,
   setCreateOrEditModal,
   setParentFolder,
 }) => {

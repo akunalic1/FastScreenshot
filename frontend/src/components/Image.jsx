@@ -17,6 +17,7 @@ const Image = ({
       className="image-content"
       key={image.id}
       src={require("../../../backend/public/images" + image.url)}
+      alt=""
     ></img>
   );
 };

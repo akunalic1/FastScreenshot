@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import FolderSidebarItem from "./FolderSidebarItem";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+
+import FolderSidebarItem from "./FolderSidebarItem";
 
 const SidebarFolderList = ({
   openedMenuOption,
@@ -49,7 +50,7 @@ const SidebarFolderList = ({
 
   const renderOneFolder = (folder, depth) => {
     return (
-      <div>
+      <>
         <FolderSidebarItem
           folder={folder}
           depth={depth}
@@ -62,7 +63,7 @@ const SidebarFolderList = ({
           setParentFolder={setParentFolder}
         />
         {!!folder.subfolders && renderFolders(folder.subfolders, depth + 1)}
-      </div>
+      </>
     );
   };
 
