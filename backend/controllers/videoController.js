@@ -1,12 +1,17 @@
 const { Videos } = require("../models");
 
 const uploadSingleVideo = async (req, res) => {
+  const { file } = req;
+  const type =
+    file.mimetype === "application/octet-stream"
+      ? `video/${file.originalname.split(".")[1]}`
+      : file.mimetype;
   const data = {
     ...req.body,
-    name: req.file?.originalname,
-    type: req.file.mimetype,
-    url: "/" + req.file.filename,
-    size: req.file.size,
+    name: file?.originalname,
+    type,
+    url: "/" + file.filename,
+    size: file.size,
   };
   await Videos.create(data);
   res.json(data);

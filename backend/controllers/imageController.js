@@ -1,10 +1,15 @@
 const { Images } = require("../models");
 
 const uploadSingleImage = async (req, res) => {
+  const { file } = req;
+  const type =
+    file.mimetype === "application/octet-stream"
+      ? `image/${file.originalname.split(".")[1]}`
+      : file.mimetype;
   const data = {
     ...req.body,
     name: req.file.originalname,
-    type: req.file.mimetype,
+    type,
     url: "/" + req.file.filename,
     size: req.file.size,
   };
