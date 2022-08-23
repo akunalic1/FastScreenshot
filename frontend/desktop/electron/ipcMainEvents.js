@@ -1,16 +1,26 @@
 const path = require("path");
-const { ipcMain, desktopCapturer, globalShortcut } = require("electron");
+const {
+  ipcMain,
+  desktopCapturer,
+  globalShortcut,
+  nativeImage,
+} = require("electron");
 const CaptureOptionsWindow = require("../windows/CaptureOptionsWindow");
 const WorkspaceWindow = require("../windows/WorkspaceWindow");
 const CaptureWindow = require("../windows/CaptureWindow");
+const { Notification } = require("electron/main");
 
 module.exports = setAllIpcMainEvents = (
   app,
   workspaceWindow,
-  captureWindow,
-  captureOptionsWindow
+  captureOptionsWindow,
+  trayMainWindow
 ) => {
   //  opening windows
+
+  if (process.platform === "win32") {
+    app.setAppUserModelId("Fast Screenshot");
+  }
   ipcMain.on("open-workspace-window", () => {
     workspaceWindow = createWindow(
       workspaceWindow,
@@ -18,17 +28,9 @@ module.exports = setAllIpcMainEvents = (
       "http://localhost:3000",
       "workspaceWindow"
     );
-  });
-
-  ipcMain.on("open-capture-window", () => {
-    captureWindow = createWindow(
-      captureWindow,
-      path.join(
-        app.getAppPath(),
-        "dist/captureOptions/captureOptions.index.html"
-      ),
-      "captureWindow"
-    );
+    workspaceWindow?.on("closed", () => {
+      workspaceWindow = null;
+    });
   });
 
   ipcMain.on("show-capture-options", () => {
@@ -40,58 +42,34 @@ module.exports = setAllIpcMainEvents = (
       ),
       "captureOptionsWindow"
     );
+    captureOptionsWindow?.on("closed", () => {
+      captureOptionsWindow = null;
+    });
   });
 
-  //  capturing events
   ipcMain.on("capture-entire-screen", () => {
-    createAndSendRecordingToScreen();
+    getScreenshot("receive-screenshot", captureOptionsWindow);
   });
-
-  ipcMain.on("capture-partial-screen", () => {});
-
-  ipcMain.on("record-screen", () => {});
-
-  ipcMain.on("send-message", (event, arg) => {
-    if (captureWindow) {
-      captureWindow.webContents.send("send-message", arg);
-    }
-  });
-
-  // refactor to utils...
 
   globalShortcut.register("Alt+CommandOrControl+I", () => {
     console.log("Electron loves global shortcuts!");
-    console.log(workspaceWindow);
-    console.log(captureWindow);
-    createWindow(
-      captureWindow,
-      path.join(
-        app.getAppPath(),
-        "dist/captureOptions/captureOptions.index.html"
+    getScreenshot("receive-screenshot", trayMainWindow);
+    new Notification({
+      title: "New screenshot",
+      body: "Your screenshot is added to your workspace!",
+      icon: nativeImage.createFromPath(
+        path.join(app.getAppPath(), "src", "assets", "bunny.png")
       ),
-      "captureWindow"
-    );
-    createAndSendRecordingToScreen();
+    }).show();
   });
 
-  const createAndSendRecordingToScreen = () => {
-    desktopCapturer
-      .getSources({
-        types: ["screen"],
-        thumbnailSize: { width: 400, height: 400 },
-      })
-      .then((sources) => {
-        let image = sources[0].thumbnail.toDataURL();
-        createWindow(
-          captureWindow,
-          path.join(
-            app.getAppPath(),
-            "dist/captureOptions/captureOptions.index.html"
-          ),
-          "captureWindow"
-        );
-        captureWindow?.webContents.send("send-message", image);
-      });
+  const getScreenshot = async (eventName, window) => {
+    const sources = await desktopCapturer.getSources({
+      types: ["screen"],
+      thumbnailSize: { width: 400, height: 400 },
+    });
+    let image = sources[0].thumbnail.toDataURL();
+    window?.webContents.send(eventName, image);
   };
 
   const createWindow = (window, url, type) => {
@@ -106,12 +84,9 @@ module.exports = setAllIpcMainEvents = (
         case "captureOptionsWindow":
           window = new CaptureOptionsWindow(url);
           break;
-        default:
-          window.on("closed", () => {
-            window = null;
-          });
       }
     }
+    window?.show();
     return window;
   };
 };

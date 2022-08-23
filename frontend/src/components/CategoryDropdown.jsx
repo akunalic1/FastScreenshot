@@ -1,11 +1,7 @@
 import React from "react";
 import Select from "react-select";
 
-const CategoryDropdown = ({
-  folderCategory,
-  setFolderCategory,
-  openedMenuOption,
-}) => {
+const CategoryDropdown = ({ folderCategory, setFolderCategory }) => {
   const handleChange = (selectedOption) => {
     setFolderCategory(selectedOption);
   };

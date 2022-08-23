@@ -10,6 +10,7 @@ class CaptureWindow extends BrowserWindow {
         preload: path.join(__dirname, "../electron/preload.js"),
         nodeIntegration: true,
       },
+      allowEval: false,
     });
     this.webContents.openDevTools();
     this.loadURL(url);

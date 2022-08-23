@@ -4,7 +4,7 @@ const path = require("path");
 class TrayMainWindow extends BrowserWindow {
   constructor(url) {
     super({
-      width: 200,
+      width: 700,
       height: 300,
       show: true,
       frame: false,
@@ -15,7 +15,6 @@ class TrayMainWindow extends BrowserWindow {
       },
     });
     this.loadURL(url);
-
     this.on("blur", this.onBlur.bind(this));
   }
 

@@ -13,6 +13,7 @@
     "axios": "^0.27.2",
     "buffer": "^6.0.3",
     "classnames": "^2.3.1",
+    "dataurl-to-blob": "^0.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",
@@ -29,8 +30,11 @@
     "eject": "react-scripts eject",
     "electron-dev": "electron --trace-warnings .",
     "electron:debug": "electron --inspect=8080",
-    "webpack:run": "webpack-dev-server --config webpack.config.js",
-    "webpack:build": "webpack --config webpack.tray.js webpack.capture.js webpack.captureOptions.js"
+    "webpack:run": "webpack-dev-server  --config webpack.captureOptions.js",
+    "webpack:build": "webpack --config webpack.tray.js webpack.capture.js webpack.captureOptions.js",
+    "webpack:build:tray": "webpack --config webpack.tray.js",
+    "webpack:build:capture": "webpack --config webpack.capture.js",
+    "webpack:build:captureOptions": "webpack --config webpack.captureOptions.js"
   },
   "eslintConfig": {
     "extends": [

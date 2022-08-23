@@ -7,7 +7,6 @@ const setAllIpcMainEvents = require("./ipcMainEvents");
 
 let trayMainWindow = null,
   workspaceWindow = null,
-  captureWindow = null,
   captureOptionsWindow = null,
   tray = null;
 
@@ -22,8 +21,8 @@ const createTrayWindowToggle = () => {
   setAllIpcMainEvents(
     app,
     workspaceWindow,
-    captureWindow,
-    captureOptionsWindow
+    captureOptionsWindow,
+    trayMainWindow
   );
 };
 
