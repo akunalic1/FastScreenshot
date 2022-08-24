@@ -76,9 +76,6 @@ module.exports = setAllIpcMainEvents = (
         case "workspaceWindow":
           window = new WorkspaceWindow(url);
           break;
-        case "captureWindow":
-          window = new CaptureWindow(url);
-          break;
         case "captureOptionsWindow":
           window = new CaptureOptionsWindow(url);
           break;
