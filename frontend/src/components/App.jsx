@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { Route, Routes } from "react-router";
-
-import LogIn from "./LogIn.jsx";
 import Workspace from "./Workspace.jsx";
 
 import "./../style/app.css";
@@ -25,7 +23,6 @@ const App = () => {
           />
         }
       ></Route>
-      <Route path="login" element={<LogIn />}></Route>
     </Routes>
   );
 };

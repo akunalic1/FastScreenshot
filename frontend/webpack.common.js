@@ -16,6 +16,10 @@ const context = {
         loader: "babel-loader",
         test: /\.js$|jsx/,
       },
+      {
+        test: /\.(webm|mp4|png|jpeg|jpg)$/,
+        use: "file-loader?name=videos/[name].[ext]",
+      },
     ],
   },
   plugins: [
@@ -26,17 +30,6 @@ const context = {
       manifest: "./public/manifest.json",
     }),
   ],
-  devServer: {
-    static: {
-      directory: path.join(__dirname, "dist"),
-    },
-    port: 5000,
-    open: [
-      "captureOptions/captureOptions.index.html",
-      "capture/capture.index.html",
-      "tray/tray.index.html",
-    ],
-  },
 };
 
 module.exports = context;

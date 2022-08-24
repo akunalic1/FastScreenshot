@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "../api/axios";
 
-import Image from "./Image";
-import Video from "./Video";
+import Image from "./Image.jsx";
+import Video from "./Video.jsx";
 
 import "./../style/workspace.css";
 

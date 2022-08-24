@@ -1,5 +1,5 @@
 .folder {
-  color: var(--secondary);
+  color: var(--primary-dark);
   display: flex;
   justify-content: space-between;
   padding: 0.3rem 0.5rem;
@@ -9,20 +9,19 @@
 
 .folder:hover {
   background-color: var(--primary);
+  color: var(--);
+  border-radius: 5px;
 }
 
 .clickable-folder {
   width: 100%;
 }
 
-.hasSubfolders {
-  background-color: var(--dark-shadow-blue);
-}
-
 .title {
   padding: 0.5rem;
   font-size: 1.2rem;
-  color: var(--secondary);
+  color: var(--primary-dark);
+  width: fit-content;
 }
 
 .folder-icon,
@@ -41,7 +40,6 @@
 .folder-icon-options:hover,
 .add-folder-icon:hover {
   background-color: rgb(155, 150, 150);
-  color: var(--dark-shadow-blue);
   border-radius: 4px;
 }
 
@@ -51,10 +49,12 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: var(--primary-dark);
 }
 
 .sidebar-options {
-  margin: 0.5rem 0;
+  padding: 0.5rem 0.5rem;
+  border-right: 1px solid var(--primary);
 }
 
 .upper,
@@ -68,16 +68,17 @@
   padding: 0.5rem 0.7rem;
   margin-left: 3rem;
   margin-top: 0rem;
-  z-index: 99999;
+  z-index: 99;
   border-radius: 0.5rem;
   background-color: var(--secondary);
   opacity: 0;
   display: none;
+  border: 1px solid var(--primary-dark);
 }
 
 .icon-wrapper .tooltip::before {
   position: absolute;
-  left: -0.3rem;
+  left: -0.45rem;
   transform: rotate(45deg);
   content: "";
   width: 0.7rem;
@@ -85,6 +86,8 @@
   top: 0.7rem;
   z-index: 999;
   background-color: var(--secondary);
+  border: 1px solid var(--primary-dark);
+  border-width: 0px 0px 1px 1px;
 }
 .icon-wrapper:hover .tooltip,
 .icon-wrapper:hover .tooltip::before {
@@ -104,6 +107,15 @@
   display: flex;
   justify-content: right;
   gap: 1rem;
+  width: fit-content;
+}
+
+.sidebar-header {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.2rem 0;
 }
 
 .custom-folder-list::-webkit-scrollbar {

@@ -15,7 +15,7 @@ const createTrayWindowToggle = () => {
     path.join(app.getAppPath(), "dist", "tray", "tray.index.html")
   );
   tray = new TrayIcon(
-    path.join(app.getAppPath(), "src", "assets", "bunny.png"),
+    path.join(app.getAppPath(), "src", "assets", "screenshot.png"),
     trayMainWindow
   );
   setAllIpcMainEvents(

@@ -13,13 +13,15 @@ const Details = ({ areDetailsOpened, item, setAreDetailsOpened }) => {
   return (
     <div className="wrapper">
       <div
-        className={classnames("information is-fullheight hero", {
+        className={classnames("information", {
           showInfo: areDetailsOpened,
           hideInfo: !areDetailsOpened,
         })}
       >
         {item && (
           <div className="item-details">
+            <div className="title">Information</div>
+
             {item.type.includes("image") ? (
               <img
                 className="item-image"

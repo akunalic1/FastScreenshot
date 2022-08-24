@@ -9,6 +9,13 @@ const context = {
   output: {
     path: path.resolve(__dirname, "dist", "tray"),
   },
+  devServer: {
+    static: {
+      directory: path.join(__dirname, "dist/tray"),
+    },
+    port: 5001,
+    open: ["tray.index.html"],
+  },
 };
 
 module.exports = merge(common, context);

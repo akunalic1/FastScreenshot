@@ -7,7 +7,6 @@ const {
 } = require("electron");
 const CaptureOptionsWindow = require("../windows/CaptureOptionsWindow");
 const WorkspaceWindow = require("../windows/WorkspaceWindow");
-const CaptureWindow = require("../windows/CaptureWindow");
 const { Notification } = require("electron/main");
 
 module.exports = setAllIpcMainEvents = (
@@ -16,11 +15,10 @@ module.exports = setAllIpcMainEvents = (
   captureOptionsWindow,
   trayMainWindow
 ) => {
-  //  opening windows
-
   if (process.platform === "win32") {
     app.setAppUserModelId("Fast Screenshot");
   }
+
   ipcMain.on("open-workspace-window", () => {
     workspaceWindow = createWindow(
       workspaceWindow,
@@ -58,7 +56,7 @@ module.exports = setAllIpcMainEvents = (
       title: "New screenshot",
       body: "Your screenshot is added to your workspace!",
       icon: nativeImage.createFromPath(
-        path.join(app.getAppPath(), "src", "assets", "bunny.png")
+        path.join(app.getAppPath(), "src", "assets", "screenshot.png")
       ),
     }).show();
   });

@@ -4,15 +4,14 @@ import { faClose } from "@fortawesome/free-solid-svg-icons";
 import axios from "../api/axios";
 import classNames from "classnames";
 
-import IconsDropdow from "./IconsDropdow";
-import CategoryDropdown from "./CategoryDropdown";
+import IconsDropdow from "./IconsDropdow.jsx";
+import CategoryDropdown from "./CategoryDropdown.jsx";
 
 import "../style/modal.css";
 import "../style/app.css";
 
 const ModalCreateEditFolder = ({
   parentFolder,
-  openModal,
   setOpenModal,
   setFolders,
   openedMenuOption,

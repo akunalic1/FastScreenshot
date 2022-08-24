@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  faWrench,
-  faFolder,
-  faImage,
-  faFilm,
-  faInfo,
-} from "@fortawesome/free-solid-svg-icons";
+import { faFolder, faImage, faFilm } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
 
@@ -23,18 +17,6 @@ const upperMenuOptions = [
     icon: faFilm,
   },
 ];
-
-const lowerMenuOptions = [
-  {
-    name: "Info",
-    icon: faInfo,
-  },
-  {
-    name: "Settings",
-    icon: faWrench,
-  },
-];
-
 const Menu = ({
   setIsSidebarOpened,
   setOpenedMenuOption,
@@ -75,19 +57,6 @@ const Menu = ({
               className={classNames("menu-icon", {
                 "clicked-menu-option": option.name === "Folders",
               })}
-              icon={option.icon}
-            />
-          </div>
-        ))}
-      </div>
-      <div className="lower">
-        {lowerMenuOptions.map((option) => (
-          <div key={option.name} className="icon-wrapper">
-            <span className="tooltip">{option.name}</span>
-            <FontAwesomeIcon
-              values={option.name}
-              onClick={(e) => menuIconHandler(e, option)}
-              className="menu-icon"
               icon={option.icon}
             />
           </div>

@@ -13,6 +13,13 @@ const context = {
   output: {
     path: path.resolve(__dirname, "dist", "captureOptions"),
   },
+  devServer: {
+    static: {
+      directory: path.join(__dirname, "dist/captureOptions"),
+    },
+    port: 5000,
+    open: ["captureOptions.index.html"],
+  },
 };
 
 module.exports = merge(common, context);

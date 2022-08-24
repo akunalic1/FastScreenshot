@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRefresh } from "@fortawesome/free-solid-svg-icons";
 
-import Menu from "./Menu";
-import SidebarFolderList from "./SidebarFolderList";
-import SidebarRotateButton from "./SidebarRotateButton";
-import FolderSidebarItem from "./FolderSidebarItem";
+import Menu from "./Menu.jsx";
+import SidebarFolderList from "./SidebarFolderList.jsx";
+import SidebarRotateButton from "./SidebarRotateButton.jsx";
+import FolderSidebarItem from "./FolderSidebarItem.jsx";
 
 import { getAllFolders } from "../utils/folderUtils";
 import "./../style/sidebar.css";
@@ -78,18 +78,20 @@ const Sidebar = ({
           hideSidebar: !isSidebarOpened,
         })}
       >
-        <div className="sidebar-top-buttons">
-          <FontAwesomeIcon
-            className="sidebar-button"
-            icon={faRefresh}
-            onClick={handleRefreshData}
-          ></FontAwesomeIcon>
-          <SidebarRotateButton
-            isSidebarOpened={isSidebarOpened}
-            setIsSidebarOpened={setIsSidebarOpened}
-          />
+        <div className="sidebar-header">
+          <div className="sidebar-top-buttons">
+            <FontAwesomeIcon
+              className="sidebar-button"
+              icon={faRefresh}
+              onClick={handleRefreshData}
+            ></FontAwesomeIcon>
+            <SidebarRotateButton
+              isSidebarOpened={isSidebarOpened}
+              setIsSidebarOpened={setIsSidebarOpened}
+            />
+          </div>
+          <div className="title">{openedMenuOption}</div>
         </div>
-        <div className="title">{openedMenuOption}</div>
         <SidebarFolderList
           openedMenuOption={openedMenuOption}
           setSelectedFolder={setSelectedFolder}

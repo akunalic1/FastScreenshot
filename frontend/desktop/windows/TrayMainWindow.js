@@ -4,8 +4,8 @@ const path = require("path");
 class TrayMainWindow extends BrowserWindow {
   constructor(url) {
     super({
-      width: 700,
-      height: 300,
+      width: 200,
+      height: 200,
       show: true,
       frame: false,
       resizable: false,
@@ -15,12 +15,7 @@ class TrayMainWindow extends BrowserWindow {
       },
     });
     this.loadURL(url);
-    this.on("blur", this.onBlur.bind(this));
   }
-
-  onBlur = () => {
-    //need to handle blur event
-  };
 }
 
 module.exports = TrayMainWindow;
