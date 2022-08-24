@@ -20,10 +20,6 @@ app.use("/folders", folderRouter);
 app.use("/images", imagesRouter);
 app.use("/videos", videosRouter);
 
-app.get("/", (req, res) => {
-  res.send({ henlo: "henlo" });
-});
-
 db.sequelize.sync({ alter: true }).then(() => {
   app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);
