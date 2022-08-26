@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
-import axios from "../api/axios";
+import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRefresh, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faRefresh } from "@fortawesome/free-solid-svg-icons";
+
+import Menu from "./Menu.jsx";
+import SidebarFolderList from "./SidebarFolderList.jsx";
+import SidebarRotateButton from "./SidebarRotateButton.jsx";
+import FolderSidebarItem from "./FolderSidebarItem.jsx";
+
+import { getAllFolders } from "../utils/folderUtils";
 import "./../style/sidebar.css";
-import SidebarRotateButton from "./SidebarRotateButton";
-import FolderSidebarItem from "./FolderSidebarItem";
-import Menu from "./Menu";
-import SidebarFolderList from "./SidebarFolderList";
 
 const classnames = require("classnames");
 
@@ -24,13 +26,8 @@ const Sidebar = ({
   folders,
   setFolders,
 }) => {
-  const getAllFolders = async () => {
-    const resp = await axios.get("/folders/all");
-    setFolders(resp.data);
-  };
-
   useEffect(() => {
-    getAllFolders();
+    getAllFolders(setFolders);
   }, []);
 
   const renderOneFolder = (folder, depth) => {
@@ -81,18 +78,20 @@ const Sidebar = ({
           hideSidebar: !isSidebarOpened,
         })}
       >
-        <div className="sidebar-top-buttons">
-          <FontAwesomeIcon
-            className="sidebar-button"
-            icon={faRefresh}
-            onClick={handleRefreshData}
-          ></FontAwesomeIcon>
-          <SidebarRotateButton
-            isSidebarOpened={isSidebarOpened}
-            setIsSidebarOpened={setIsSidebarOpened}
-          />
+        <div className="sidebar-header">
+          <div className="sidebar-top-buttons">
+            <FontAwesomeIcon
+              className="sidebar-button"
+              icon={faRefresh}
+              onClick={handleRefreshData}
+            ></FontAwesomeIcon>
+            <SidebarRotateButton
+              isSidebarOpened={isSidebarOpened}
+              setIsSidebarOpened={setIsSidebarOpened}
+            />
+          </div>
+          <div className="title">{openedMenuOption}</div>
         </div>
-        <div className="title">{openedMenuOption}</div>
         <SidebarFolderList
           openedMenuOption={openedMenuOption}
           setSelectedFolder={setSelectedFolder}

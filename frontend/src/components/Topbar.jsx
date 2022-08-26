@@ -1,12 +1,10 @@
 import React from "react";
-
+import { Outlet } from "react-router";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import classNames from "classNames";
 
 import "./../style/topbar.css";
-import { Outlet } from "react-router";
-
-const classnames = require("classnames");
 
 const TopBar = ({
   isSidebarOpened,
@@ -19,7 +17,7 @@ const TopBar = ({
       <div className="topbar">
         <div className="left-topbar">
           <button
-            className={classnames("sidebar-button", {
+            className={classNames("sidebar-button", {
               "rotate-sidebar-button": isSidebarOpened,
             })}
             onClick={(e) => setIsSidebarOpened(!isSidebarOpened)}
@@ -29,7 +27,7 @@ const TopBar = ({
           <div className="logo"></div>
         </div>
         <button
-          className={classnames("sidebar-button", {
+          className={classNames("sidebar-button", {
             "rotate-Information-button": areDetailsOpened,
           })}
           onClick={(e) => setAreDetailsOpened(!areDetailsOpened)}

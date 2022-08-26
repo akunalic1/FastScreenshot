@@ -1,15 +1,10 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const webpack = require("webpack"); //to access built-in plugins
 
 const context = {
   mode: "development",
-  entry: {
-    tray: path.resolve(__dirname, "desktop", "index.js"),
-  },
   output: {
     filename: "[name].bundle.js",
-    path: path.resolve(__dirname, "dist"),
   },
   module: {
     rules: [
@@ -21,10 +16,20 @@ const context = {
         loader: "babel-loader",
         test: /\.js$|jsx/,
       },
+      {
+        test: /\.(webm|mp4|png|jpeg|jpg)$/,
+        use: "file-loader?name=videos/[name].[ext]",
+      },
     ],
   },
-  plugins: [new HtmlWebpackPlugin({ template: "./desktop/tray.html" })],
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, "public", "index.html"),
+      favicon: "./public/favicon.ico",
+      filename: "[name].index.html",
+      manifest: "./public/manifest.json",
+    }),
+  ],
 };
 
 module.exports = context;
-

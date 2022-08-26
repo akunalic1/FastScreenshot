@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
+import axios from "../api/axios";
 
 import Sidebar from "./Sidebar.jsx";
 import Content from "./Content.jsx";
 import Details from "./Details.jsx";
-import { useNavigate } from "react-router";
-import axios from "../api/axios";
 import ModalCreateEditFolder from "./ModalCreateEditFolder.jsx";
 
 const Workspace = ({
-  isLoggedIn,
   isSidebarOpened,
   setIsSidebarOpened,
   areDetailsOpened,
   setAreDetailsOpened,
 }) => {
-  const navigate = useNavigate();
   const [openedMenuOption, setOpenedMenuOption] = useState("Folders");
   const [clickedItem, setClickedItem] = useState(null);
   const [selectedFolder, setSelectedFolder] = useState(null);
@@ -32,10 +30,6 @@ const Workspace = ({
     };
     getRootFolder();
   }, []);
-
-  useEffect(() => {
-    if (!isLoggedIn) navigate("/login");
-  });
 
   return (
     <div className="main-wrapper">

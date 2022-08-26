@@ -1,16 +1,17 @@
 import React, { useState, useEffect, createRef } from "react";
-import IconsDropdow from "./IconsDropdow";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
-import classNames from "classnames";
 import axios from "../api/axios";
+import classNames from "classnames";
+
+import IconsDropdow from "./IconsDropdow.jsx";
+import CategoryDropdown from "./CategoryDropdown.jsx";
+
 import "../style/modal.css";
 import "../style/app.css";
-import CategoryDropdown from "./CategoryDropdown";
 
 const ModalCreateEditFolder = ({
   parentFolder,
-  openModal,
   setOpenModal,
   setFolders,
   openedMenuOption,
@@ -24,6 +25,11 @@ const ModalCreateEditFolder = ({
   });
 
   const folderNameInputRef = createRef();
+
+  const clearValidationBorder = () => {
+    folderNameInputRef?.current?.classList.remove("success");
+    folderNameInputRef?.current?.classList.remove("error");
+  };
 
   useEffect(() => {
     clearValidationBorder();
@@ -42,11 +48,6 @@ const ModalCreateEditFolder = ({
           icon: null,
         });
   }, [openedMenuOption]);
-
-  const clearValidationBorder = () => {
-    folderNameInputRef?.current?.classList.remove("success");
-    folderNameInputRef?.current?.classList.remove("error");
-  };
 
   const addFolderToDb = async () => {
     axios.post("/folders", {

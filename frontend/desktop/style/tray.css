@@ -1,0 +1,16 @@
+.tray-buttons {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  width: fit-content;
+}
+
+.button {
+  width: 100% !important;
+}
+
+html {
+  width: fit-content;
+  height: fit-content;
+  background-color: var(--secondary);
+}

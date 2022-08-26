@@ -10,7 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default {
+const icons = {
   "fa-folder": <FontAwesomeIcon icon={faFolder} />,
   "fa-heart": <FontAwesomeIcon icon={faHeart} />,
   "fa-folder-tree": <FontAwesomeIcon icon={faFolderTree} />,
@@ -20,3 +20,5 @@ export default {
   "fa-trash": <FontAwesomeIcon icon={faTrash} />,
   "fa-ellipsis-v": <FontAwesomeIcon icon={faEllipsisV} />,
 };
+
+export default icons;

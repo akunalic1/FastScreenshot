@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "../api/axios";
 
+import Image from "./Image.jsx";
+import Video from "./Video.jsx";
+
 import "./../style/workspace.css";
-import Image from "./Image";
-import Video from "./Video";
 
 const classnames = require("classnames");
 
@@ -35,7 +36,7 @@ const Content = ({
   }, []);
 
   useEffect(() => {
-    if (allFolderId != selectedFolder?.id) {
+    if (allFolderId !== selectedFolder?.id) {
       setItems(
         openedMenuOption === "Photos"
           ? allImages.filter((image) => image.folder === selectedFolder?.id)
