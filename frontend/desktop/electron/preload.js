@@ -6,7 +6,6 @@ contextBridge.exposeInMainWorld("ELECTRON_API", {
   showCaptureOptions: () => ipcRenderer.send("show-capture-options", ""),
   captureEntireScreen: () => ipcRenderer.send("capture-entire-screen", ""),
   recordScreen: () => ipcRenderer.send("record-screen", ""),
-  sendMessage: () => ipcRenderer.send("send-message", "SOME MESSAGE"),
 
   //  receive
   receiveMessage: (callback) => ipcRenderer.on("receive-message", callback),
