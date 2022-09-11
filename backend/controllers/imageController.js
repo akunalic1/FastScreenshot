@@ -1,4 +1,4 @@
-const { Images } = require("../models");
+const { Images, Videos } = require("../models");
 
 const uploadSingleImage = async (req, res) => {
   const { file } = req;
@@ -37,11 +37,15 @@ const changeImageDestination = async (req, res) => {
 };
 
 const getImageNumberForFolder = async (req, res) => {
-  const count = await Images.count({
-    where: {
-      folder: req.params.folderId,
-    },
-  });
+  let count;
+  if ("3" === req.params.folderId) {
+    count = (await Images.count()) + (await Videos.count());
+  } else
+    count = await Images.count({
+      where: {
+        folder: req.params.folderId,
+      },
+    });
   res.json({ count });
 };
 

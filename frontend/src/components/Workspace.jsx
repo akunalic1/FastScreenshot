@@ -34,6 +34,7 @@ const Workspace = ({
   return (
     <div className="main-wrapper">
       <Sidebar
+        selectedFolder={selectedFolder}
         isSidebarOpened={isSidebarOpened}
         setIsSidebarOpened={setIsSidebarOpened}
         openedMenuOption={openedMenuOption}

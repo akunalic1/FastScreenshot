@@ -15,6 +15,7 @@ const SidebarFolderList = ({
   folders,
   getAllFolders,
   handleOpenModal,
+  selectedFolder,
 }) => {
   const [defaultPhotoFolders, setDefaultPhotoFolders] = useState([]);
   const [customPhotoFolders, setCustomPhotoFolders] = useState([]);
@@ -54,6 +55,7 @@ const SidebarFolderList = ({
         <FolderSidebarItem
           folder={folder}
           depth={depth}
+          selectedFolder={selectedFolder}
           setSelectedFolder={setSelectedFolder}
           getAllFolders={getAllFolders}
           openModal={openModal}

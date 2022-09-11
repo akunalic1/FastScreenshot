@@ -29,7 +29,7 @@ const Buttons = () => {
       </button>
       <br />
       <button className="button" onClick={handleOpenCaptureOptions}>
-        Capture Screen Options
+        Capture Options
       </button>
     </div>
   );

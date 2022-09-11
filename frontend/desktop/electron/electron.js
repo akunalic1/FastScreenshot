@@ -24,6 +24,7 @@ const createTrayWindowToggle = () => {
     captureOptionsWindow,
     trayMainWindow
   );
+  require("./../windows/WorkspaceMenu");
 };
 
 app.whenReady().then(createTrayWindowToggle);

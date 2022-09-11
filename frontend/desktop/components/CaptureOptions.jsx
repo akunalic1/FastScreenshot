@@ -108,12 +108,12 @@ const CaptureOptions = () => {
 
         <div className="button-options">
           <button className="button" onClick={handleCaptureEntireScreen}>
-            Capture Entire Screeen
+            Capture Entire Screen
           </button>
           <br />
           {!startRecording ? (
             <button className="button" onClick={handleRecordScreen}>
-              Record Screeen
+              Record Screen
             </button>
           ) : (
             <button className="button" onClick={handleStopRecording}>
