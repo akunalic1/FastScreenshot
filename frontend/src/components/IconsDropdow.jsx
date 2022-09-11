@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import icons from "../constants/icons";
 import Select from "react-select";
+import "../style/modal.css";
 
 const IconsDropdow = ({ selectedIcon, setSelectedIcon }) => {
   useEffect(() => {
@@ -26,7 +27,7 @@ const IconsDropdow = ({ selectedIcon, setSelectedIcon }) => {
   };
 
   return (
-    <div className="icons-dropdown">
+    <div className="icons-dropdown" st>
       <Select
         placeholder="Select Option"
         value={selectedIcon}

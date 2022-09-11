@@ -7,6 +7,7 @@ const FolderSidebarItem = ({
   folder,
   depth,
   setSelectedFolder,
+  selectedFolder,
   getAllFolders,
   openModal,
   setOpenModal,
@@ -79,7 +80,9 @@ const FolderSidebarItem = ({
       })}
     >
       <div
-        className={classnames("folder")}
+        className={classnames("folder", {
+          "selected-folder": selectedFolder?.id === folder?.id,
+        })}
         style={{ marginLeft: `${depth * 16}px` }}
       >
         <div

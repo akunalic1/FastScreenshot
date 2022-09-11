@@ -36,6 +36,7 @@
   height: 2.2rem;
   border-radius: 5px;
   padding: 0 1rem;
+  font-size: 1rem;
 }
 .submit-folder-button:hover {
   background-color: var(--primary);
@@ -58,4 +59,8 @@
 
 .success {
   border: 2px solid green;
+}
+#react-select-5-listbox {
+  height: 8rem;
+  overflow: hidden;
 }

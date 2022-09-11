@@ -52,6 +52,10 @@ module.exports = setAllIpcMainEvents = (
   globalShortcut.register("Alt+CommandOrControl+I", () => {
     console.log("Electron loves global shortcuts!");
     getScreenshot("receive-screenshot", trayMainWindow);
+    displayNotification();
+  });
+
+  const displayNotification = () => {
     new Notification({
       title: "New screenshot",
       body: "Your screenshot is added to your workspace!",
@@ -59,8 +63,7 @@ module.exports = setAllIpcMainEvents = (
         path.join(app.getAppPath(), "src", "assets", "screenshot.png")
       ),
     }).show();
-  });
-
+  };
   const getScreenshot = async (eventName, window) => {
     const sources = await desktopCapturer.getSources({
       types: ["screen"],

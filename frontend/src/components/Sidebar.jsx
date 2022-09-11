@@ -25,6 +25,7 @@ const Sidebar = ({
   setParentFolder,
   folders,
   setFolders,
+  selectedFolder,
 }) => {
   useEffect(() => {
     getAllFolders(setFolders);
@@ -37,6 +38,7 @@ const Sidebar = ({
           folder={folder}
           depth={depth}
           setSelectedFolder={setSelectedFolder}
+          selectedFolder={selectedFolder}
           getAllFolders={getAllFolders}
           openModal={openModal}
           setOpenModal={setOpenModal}
@@ -104,6 +106,7 @@ const Sidebar = ({
           setFolders={setFolders}
           getAllFolders={getAllFolders}
           handleOpenModal={handleOpenModal}
+          selectedFolder={selectedFolder}
         ></SidebarFolderList>
       </div>
     </div>

@@ -7,16 +7,15 @@
   font-size: 0.9rem;
 }
 
-.folder:hover {
+.folder:hover,
+.selected-folder {
   background-color: var(--primary);
-  color: var(--);
   border-radius: 5px;
 }
 
 .clickable-folder {
   width: 100%;
 }
-
 .title {
   padding: 0.5rem;
   font-size: 1.2rem;
